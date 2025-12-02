@@ -1,0 +1,24 @@
+﻿  Determining projects to restore...
+  All projects are up-to-date for restore.
+  SmartParkingLot.Domain -> C:\Users\Fenish\Downloads\final_best_proj\SmartParkingLot.Domain\bin\Debug\net8.0\SmartParkingLot.Domain.dll
+  SmartParkingLot.Devices -> C:\Users\Fenish\Downloads\final_best_proj\SmartParkingLot.Devices\bin\Debug\net8.0\SmartParkingLot.Devices.dll
+  SmartParkingLot.Infrastructure -> C:\Users\Fenish\Downloads\final_best_proj\SmartParkingLot.Infrastructure\bin\Debug\net8.0\SmartParkingLot.Infrastructure.dll
+  SmartParkingLot.Application -> C:\Users\Fenish\Downloads\final_best_proj\SmartParkingLot.Application\bin\Debug\net8.0\SmartParkingLot.Application.dll
+  SmartParkingLot.Web -> C:\Users\Fenish\Downloads\final_best_proj\SmartParkingLot.Web\bin\Debug\net8.0\SmartParkingLot.Web.dll
+C:\Users\Fenish\Downloads\final_best_proj\SmartParkingLot.Tests\IntegrationTests\IntegrationTests.cs(101,50): error CS1503: Argument 1: cannot convert from 'SmartParkingLot.Infrastructure.Data.ApplicationDbContext' to 'Microsoft.EntityFrameworkCore.IDbContextFactory<SmartParkingLot.Infrastructure.Data.ApplicationDbContext>' [C:\Users\Fenish\Downloads\final_best_proj\SmartParkingLot.Tests\SmartParkingLot.Tests.csproj]
+C:\Users\Fenish\Downloads\final_best_proj\SmartParkingLot.Tests\IntegrationTests\IntegrationTests.cs(102,56): error CS1503: Argument 1: cannot convert from 'SmartParkingLot.Infrastructure.Data.ApplicationDbContext' to 'Microsoft.EntityFrameworkCore.IDbContextFactory<SmartParkingLot.Infrastructure.Data.ApplicationDbContext>' [C:\Users\Fenish\Downloads\final_best_proj\SmartParkingLot.Tests\SmartParkingLot.Tests.csproj]
+C:\Users\Fenish\Downloads\final_best_proj\SmartParkingLot.Tests\IntegrationTests\IntegrationTests.cs(22,44): error CS1503: Argument 1: cannot convert from 'SmartParkingLot.Infrastructure.Data.ApplicationDbContext' to 'Microsoft.EntityFrameworkCore.IDbContextFactory<SmartParkingLot.Infrastructure.Data.ApplicationDbContext>' [C:\Users\Fenish\Downloads\final_best_proj\SmartParkingLot.Tests\SmartParkingLot.Tests.csproj]
+C:\Users\Fenish\Downloads\final_best_proj\SmartParkingLot.Tests\FeatureTests.cs(40,21): error CS1503: Argument 3: cannot convert from 'SmartParkingLot.Infrastructure.Data.ApplicationDbContext' to 'Microsoft.EntityFrameworkCore.IDbContextFactory<SmartParkingLot.Infrastructure.Data.ApplicationDbContext>' [C:\Users\Fenish\Downloads\final_best_proj\SmartParkingLot.Tests\SmartParkingLot.Tests.csproj]
+
+Build FAILED.
+
+C:\Users\Fenish\Downloads\final_best_proj\SmartParkingLot.Tests\IntegrationTests\IntegrationTests.cs(101,50): error CS1503: Argument 1: cannot convert from 'SmartParkingLot.Infrastructure.Data.ApplicationDbContext' to 'Microsoft.EntityFrameworkCore.IDbContextFactory<SmartParkingLot.Infrastructure.Data.ApplicationDbContext>' [C:\Users\Fenish\Downloads\final_best_proj\SmartParkingLot.Tests\SmartParkingLot.Tests.csproj]
+C:\Users\Fenish\Downloads\final_best_proj\SmartParkingLot.Tests\IntegrationTests\IntegrationTests.cs(102,56): error CS1503: Argument 1: cannot convert from 'SmartParkingLot.Infrastructure.Data.ApplicationDbContext' to 'Microsoft.EntityFrameworkCore.IDbContextFactory<SmartParkingLot.Infrastructure.Data.ApplicationDbContext>' [C:\Users\Fenish\Downloads\final_best_proj\SmartParkingLot.Tests\SmartParkingLot.Tests.csproj]
+C:\Users\Fenish\Downloads\final_best_proj\SmartParkingLot.Tests\IntegrationTests\IntegrationTests.cs(22,44): error CS1503: Argument 1: cannot convert from 'SmartParkingLot.Infrastructure.Data.ApplicationDbContext' to 'Microsoft.EntityFrameworkCore.IDbContextFactory<SmartParkingLot.Infrastructure.Data.ApplicationDbContext>' [C:\Users\Fenish\Downloads\final_best_proj\SmartParkingLot.Tests\SmartParkingLot.Tests.csproj]
+C:\Users\Fenish\Downloads\final_best_proj\SmartParkingLot.Tests\FeatureTests.cs(40,21): error CS1503: Argument 3: cannot convert from 'SmartParkingLot.Infrastructure.Data.ApplicationDbContext' to 'Microsoft.EntityFrameworkCore.IDbContextFactory<SmartParkingLot.Infrastructure.Data.ApplicationDbContext>' [C:\Users\Fenish\Downloads\final_best_proj\SmartParkingLot.Tests\SmartParkingLot.Tests.csproj]
+    0 Warning(s)
+    4 Error(s)
+
+Time Elapsed 00:00:01.50
+
+Workload updates are available. Run `dotnet workload list` for more information.

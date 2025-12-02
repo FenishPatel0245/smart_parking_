@@ -1,0 +1,371 @@
+@page "/user/checkin"
+@using SmartParkingLot.Application.Services
+@using SmartParkingLot.Domain.Models
+@using SmartParkingLot.Web.Shared.Components
+@inject IParkingService ParkingService
+@inject NavigationManager Navigation
+
+<div class="checkin-page animate-fade-in">
+    <div class="wizard-container">
+        @if (currentStep == 1)
+        {
+            <GlassCard Class="wizard-step animate-slide-up">
+                <div class="step-header">
+                    <h2><i class="fas fa-camera"></i> Vehicle Entry</h2>
+                    <p class="text-muted">Scanning license plate...</p>
+                </div>
+
+                <div class="scan-animation">
+                    <div class="scanner-line"></div>
+                    <div class="plate-placeholder">
+                        @if (isScanning)
+                        {
+                            <span class="scanning-text">SCANNING...</span>
+                        }
+                        else
+                        {
+                            <span class="scanned-plate">@plateNumber</span>
+                        }
+                    </div>
+                </div>
+
+                <div class="manual-entry">
+                    <label class="form-label">License Plate Number</label>
+                    <input class="form-control text-center text-lg font-bold" @bind="plateNumber" placeholder="Enter Plate Number" />
+                </div>
+
+                <div class="step-actions">
+                    <button class="btn-glass" @onclick="GoBack">Cancel</button>
+                    <button class="btn-primary" @onclick="NextStep" disabled="@string.IsNullOrWhiteSpace(plateNumber)">
+                        Next <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </GlassCard>
+        }
+        else if (currentStep == 2)
+        {
+            <GlassCard Class="wizard-step animate-slide-up">
+                <div class="step-header">
+                    <h2><i class="fas fa-car"></i> Vehicle Type</h2>
+                    <p class="text-muted">Select your vehicle type for best slot</p>
+                </div>
+
+                <div class="type-grid">
+                    <div class="type-card @(vehicleType == "Regular" ? "active" : "")" @onclick='() => SelectType("Regular")'>
+                        <i class="fas fa-car"></i>
+                        <span>Regular</span>
+                    </div>
+                    <div class="type-card @(vehicleType == "Electric" ? "active" : "")" @onclick='() => SelectType("Electric")'>
+                        <i class="fas fa-charging-station"></i>
+                        <span>Electric (EV)</span>
+                    </div>
+                    <div class="type-card @(vehicleType == "Accessible" ? "active" : "")" @onclick='() => SelectType("Accessible")'>
+                        <i class="fas fa-wheelchair"></i>
+                        <span>Accessible</span>
+                    </div>
+                </div>
+
+                <div class="step-actions">
+                    <button class="btn-glass" @onclick="PrevStep">Back</button>
+                    <button class="btn-primary" @onclick="ConfirmCheckIn" disabled="@isProcessing">
+                        @if (isProcessing)
+                        {
+                            <span><i class="fas fa-spinner fa-spin"></i> Assigning...</span>
+                        }
+                        else
+                        {
+                            <span>Confirm Check-In</span>
+                        }
+                    </button>
+                </div>
+            </GlassCard>
+        }
+        else if (currentStep == 3)
+        {
+            <GlassCard Class="wizard-step success-step animate-slide-up">
+                <div class="success-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h2>Check-In Successful!</h2>
+                <p class="text-muted">Please proceed to your assigned slot.</p>
+
+                <div class="ticket-info">
+                    <div class="ticket-row">
+                        <span class="label">Assigned Slot</span>
+                        <span class="value slot-number">@assignedTicket?.SlotNumber</span>
+                    </div>
+                    <div class="ticket-row">
+                        <span class="label">License Plate</span>
+                        <span class="value">@assignedTicket?.PlateNumber</span>
+                    </div>
+                    <div class="ticket-row">
+                        <span class="label">Entry Time</span>
+                        <span class="value">@(assignedTicket != null ? assignedTicket.EntryTime.ToLocalTime().ToString("HH:mm") : "--:--")</span>
+                    </div>
+                </div>
+
+                <div class="map-placeholder">
+                    <i class="fas fa-map-marked-alt"></i>
+                    <span>Follow the lighted path to Slot @assignedTicket?.SlotNumber</span>
+                </div>
+
+                <button class="btn-primary btn-block" @onclick="Finish">Done</button>
+            </GlassCard>
+        }
+    </div>
+</div>
+
+<style>
+    .checkin-page {
+        display: flex;
+        justify-content: center;
+        padding-top: 2rem;
+    }
+
+    .wizard-container {
+        width: 100%;
+        max-width: 500px;
+    }
+
+    .step-header {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
+    .step-header h2 {
+        font-size: 1.75rem;
+        margin-bottom: 0.5rem;
+    }
+
+    /* Scan Animation */
+    .scan-animation {
+        height: 150px;
+        background: rgba(0, 0, 0, 0.3);
+        border-radius: var(--radius-md);
+        position: relative;
+        overflow: hidden;
+        margin-bottom: 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 2px solid var(--border-glass);
+    }
+
+    .scanner-line {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: var(--accent);
+        box-shadow: 0 0 10px var(--accent);
+        animation: scan 2s infinite linear;
+    }
+
+    @@keyframes scan {
+        0% { top: 0; }
+        100% { top: 100%; }
+    }
+
+    .plate-placeholder {
+        font-family: monospace;
+        font-size: 2rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        color: var(--text-main);
+        background: white;
+        color: black;
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+        border: 2px solid #333;
+    }
+
+    .scanning-text {
+        font-size: 1rem;
+        color: #666;
+        animation: blink 1s infinite;
+    }
+
+    @@keyframes blink {
+        50% { opacity: 0.5; }
+    }
+
+    /* Type Grid */
+    .type-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+        margin-bottom: 2rem;
+    }
+
+    .type-card {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid var(--border-glass);
+        border-radius: var(--radius-md);
+        padding: 1.5rem 0.5rem;
+        text-align: center;
+        cursor: pointer;
+        transition: var(--transition-fast);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .type-card i {
+        font-size: 1.5rem;
+        color: var(--text-muted);
+    }
+
+    .type-card:hover {
+        background: rgba(255, 255, 255, 0.1);
+    }
+
+    .type-card.active {
+        background: var(--primary);
+        border-color: var(--primary);
+        box-shadow: 0 0 15px var(--primary-glow);
+    }
+
+    .type-card.active i, .type-card.active span {
+        color: white;
+    }
+
+    /* Ticket Info */
+    .ticket-info {
+        background: rgba(255, 255, 255, 0.9);
+        color: #1f2937;
+        padding: 1.5rem;
+        border-radius: var(--radius-md);
+        margin: 2rem 0;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .ticket-row {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 0.5rem;
+        border-bottom: 1px dashed #e5e7eb;
+        padding-bottom: 0.5rem;
+    }
+
+    .ticket-row:last-child {
+        border-bottom: none;
+        margin-bottom: 0;
+        padding-bottom: 0;
+    }
+
+    .ticket-row .label {
+        color: #6b7280;
+        font-size: 0.9rem;
+    }
+
+    .ticket-row .value {
+        font-weight: 600;
+    }
+
+    .slot-number {
+        font-size: 1.5rem;
+        color: var(--primary);
+    }
+
+    .success-icon {
+        font-size: 4rem;
+        color: var(--success);
+        margin-bottom: 1rem;
+        text-align: center;
+    }
+
+    .step-actions {
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+    }
+
+    .map-placeholder {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px dashed var(--border-glass);
+        padding: 1rem;
+        border-radius: var(--radius-md);
+        text-align: center;
+        margin-bottom: 2rem;
+        color: var(--accent);
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        align-items: center;
+    }
+</style>
+
+@code {
+    private int currentStep = 1;
+    private string plateNumber = "";
+    private string vehicleType = "Regular";
+    private bool isScanning = true;
+    private bool isProcessing = false;
+    private ParkingTicket? assignedTicket;
+
+    protected override async Task OnInitializedAsync()
+    {
+        // Simulate scanning delay
+        await Task.Delay(2000);
+        isScanning = false;
+        plateNumber = GenerateRandomPlate();
+        StateHasChanged();
+    }
+
+    private string GenerateRandomPlate()
+    {
+        var random = new Random();
+        var letters = new string(Enumerable.Repeat("ABCDEFGHIJKLMNOPQRSTUVWXYZ", 3).Select(s => s[random.Next(s.Length)]).ToArray());
+        var numbers = random.Next(100, 999);
+        return $"{letters}-{numbers}";
+    }
+
+    private void NextStep()
+    {
+        currentStep++;
+    }
+
+    private void PrevStep()
+    {
+        currentStep--;
+    }
+
+    private void SelectType(string type)
+    {
+        vehicleType = type;
+    }
+
+    private async Task ConfirmCheckIn()
+    {
+        isProcessing = true;
+        try
+        {
+            // Simulate processing delay
+            await Task.Delay(1500);
+            assignedTicket = await ParkingService.CheckInAsync(plateNumber, vehicleType);
+            currentStep = 3;
+        }
+        catch (Exception ex)
+        {
+            // Handle error (e.g. no slots)
+            // Ideally show a toast or alert
+            Console.WriteLine(ex.Message);
+        }
+        finally
+        {
+            isProcessing = false;
+        }
+    }
+
+    private void Finish()
+    {
+        Navigation.NavigateTo("/user/dashboard");
+    }
+
+    private void GoBack()
+    {
+        Navigation.NavigateTo("/user/dashboard");
+    }
+}

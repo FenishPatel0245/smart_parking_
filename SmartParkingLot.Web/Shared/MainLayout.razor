@@ -1,0 +1,245 @@
+@inherits LayoutComponentBase
+@inject NavigationManager Navigation
+@inject SmartParkingLot.Application.Services.IAuthenticationService AuthService
+@inject IJSRuntime JSRuntime
+
+@if (!isInitialized)
+{
+    <div class="loading-overlay">
+        <div class="spinner"></div>
+        <div style="color: white; margin-top: 1rem; font-family: monospace;">@debugMessage</div>
+    </div>
+}
+else
+{
+    <div class="layout-container">
+        <header class="glass-panel floating-header">
+            <div class="brand">
+                <i class="fas fa-parking brand-icon"></i>
+                <span class="brand-text">Smart<span class="text-primary">Parking</span></span>
+            </div>
+
+            <nav class="main-nav">
+                <NavLink class="nav-link" href="/user/dashboard" Match="NavLinkMatch.All">
+                    <i class="fas fa-home"></i> Home
+                </NavLink>
+                <NavLink class="nav-link" href="/user/checkin">
+                    <i class="fas fa-car-side"></i> Check In
+                </NavLink>
+                <NavLink class="nav-link" href="/user/checkout">
+                    <i class="fas fa-receipt"></i> Check Out
+                </NavLink>
+                
+                @if (AuthService.CurrentUser?.Role == "Admin")
+                {
+                    <NavLink class="nav-link" href="/admin/dashboard">
+                        <i class="fas fa-chart-line"></i> Admin
+                    </NavLink>
+                }
+            </nav>
+
+            <div class="user-controls">
+                @if (AuthService.CurrentUser != null)
+                {
+                    <div class="user-profile">
+                        <span class="user-name">@AuthService.CurrentUser.FullName</span>
+                        <span class="user-role badge badge-neutral">@(AuthService.CurrentUser.Role == "Operator" ? "User" : AuthService.CurrentUser.Role)</span>
+                    </div>
+                    <button class="btn-glass btn-sm" @onclick="Logout">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </button>
+                }
+                else
+                {
+                    <NavLink class="btn-primary btn-sm" href="/login">
+                        Login
+                    </NavLink>
+                }
+            </div>
+        </header>
+
+        <main class="content-area animate-fade-in">
+            @Body
+        </main>
+    </div>
+}
+
+<style>
+    .loading-overlay {
+        position: fixed;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: var(--bg-dark);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 2000;
+    }
+    
+    .spinner {
+        width: 40px;
+        height: 40px;
+        border: 3px solid rgba(255,255,255,0.1);
+        border-radius: 50%;
+        border-top-color: var(--primary);
+        animation: spin 1s ease-in-out infinite;
+    }
+    
+    @@keyframes spin {
+        to { transform: rotate(360deg); }
+    }
+
+    .layout-container {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .floating-header {
+        position: fixed;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 95%;
+        max-width: 1400px;
+        height: 70px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 2rem;
+        z-index: 1000;
+    }
+
+    .brand {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 1.25rem;
+        font-weight: 700;
+        letter-spacing: -0.03em;
+    }
+
+    .brand-icon {
+        color: var(--primary);
+        font-size: 1.5rem;
+    }
+
+    .main-nav {
+        display: flex;
+        gap: 1rem;
+    }
+
+    .nav-link {
+        color: var(--text-muted);
+        text-decoration: none;
+        padding: 0.5rem 1rem;
+        border-radius: var(--radius-full);
+        transition: var(--transition-fast);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-weight: 500;
+        font-size: 0.9rem;
+    }
+
+    .nav-link:hover {
+        color: var(--text-main);
+        background: rgba(255, 255, 255, 0.05);
+    }
+
+    .nav-link.active {
+        color: #fff;
+        background: var(--primary);
+        box-shadow: 0 4px 12px var(--primary-glow);
+    }
+
+    .user-controls {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .user-profile {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        line-height: 1.2;
+    }
+
+    .user-name {
+        font-weight: 600;
+        font-size: 0.9rem;
+    }
+
+    .user-role {
+        font-size: 0.7rem;
+        padding: 0.1rem 0.5rem;
+    }
+
+    .content-area {
+        margin-top: 110px; /* Header height + top spacing */
+        padding: 0 2rem;
+        flex: 1;
+        width: 100%;
+        max-width: 1400px;
+        align-self: center;
+    }
+
+    @@media (max-width: 768px) {
+        .floating-header {
+            top: 0;
+            width: 100%;
+            border-radius: 0;
+            padding: 0 1rem;
+        }
+
+        .brand-text {
+            display: none;
+        }
+
+        .nav-link span {
+            display: none;
+        }
+    }
+</style>
+
+@code {
+    private bool isInitialized = false;
+    private string debugMessage = "Waiting...";
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            try
+            {
+                debugMessage = "Calling InitializeAsync...";
+                StateHasChanged();
+                
+                await AuthService.InitializeAsync();
+                
+                debugMessage = $"Init Done. User: {AuthService.CurrentUser?.Username ?? "null"}";
+                StateHasChanged();
+                
+                // Small delay to read message if needed, or just proceed
+                await Task.Delay(500);
+                
+                isInitialized = true;
+                StateHasChanged();
+            }
+            catch (Exception ex)
+            {
+                debugMessage = $"Error: {ex.Message}";
+                StateHasChanged();
+            }
+        }
+    }
+
+    private async Task Logout()
+    {
+        if (AuthService.CurrentUser != null)
+        {
+            await AuthService.LogoutAsync(AuthService.CurrentUser.Id);
+            Navigation.NavigateTo("/login", true);
+        }
+    }
+}

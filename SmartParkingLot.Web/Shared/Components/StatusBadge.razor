@@ -1,0 +1,25 @@
+<span class="badge @GetStatusClass() @Class">
+    @if (!string.IsNullOrEmpty(Icon))
+    {
+        <i class="@Icon" style="margin-right: 4px;"></i>
+    }
+    @Text
+</span>
+
+@code {
+    [Parameter] public string Text { get; set; } = "";
+    [Parameter] public string Status { get; set; } = "neutral"; // success, warning, danger, neutral
+    [Parameter] public string Icon { get; set; } = "";
+    [Parameter] public string Class { get; set; } = "";
+
+    private string GetStatusClass()
+    {
+        return Status.ToLower() switch
+        {
+            "success" or "active" or "online" or "available" => "badge-success",
+            "warning" or "pending" or "busy" or "reserved" => "badge-warning",
+            "danger" or "error" or "offline" or "faulty" => "badge-danger",
+            _ => "badge-neutral"
+        };
+    }
+}

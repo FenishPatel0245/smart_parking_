@@ -1,0 +1,9 @@
+C:\Users\Fenish\Downloads\final_best_proj\SmartParkingLot.Web\Pages\Admin\Dashboard.razor(11,13): error CS0535: 'Dashboard' does not implement interface member 'IDisposable.Dispose()' [C:\Users\Fenish\Downloads\final_best_proj\SmartParkingLot.Web\SmartParkingLot.Web.csproj]
+
+Build FAILED.
+    0 Warning(s)
+    1 Error(s)
+
+Time Elapsed 00:00:01.25
+
+Workload updates are available. Run `dotnet workload list` for more information.

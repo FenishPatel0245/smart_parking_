@@ -1,0 +1,325 @@
+@page "/admin/simulation"
+@using SmartParkingLot.Application.ViewModels
+@using SmartParkingLot.Web.Shared.Components
+@inject SimulationViewModel ViewModel
+@inject NavigationManager Navigation
+
+<div class="simulation-dashboard animate-fade-in">
+    <div class="dashboard-header-row">
+        <div>
+            <h1><i class="fas fa-microchip"></i> SCADA Control Panel</h1>
+            <p class="text-muted">Hardware Simulation & Manual Overrides</p>
+        </div>
+        <div class="header-actions">
+            <GlassCard Class="status-card">
+                <span class="label">System Status</span>
+                <StatusBadge Status="@ViewModel.StatusMessage" />
+            </GlassCard>
+            <button class="btn-glass btn-sm" @onclick='() => Navigation.NavigateTo("/admin/dashboard")'>
+                <i class="fas fa-arrow-left"></i> Back to Dashboard
+            </button>
+        </div>
+    </div>
+
+
+
+    <ActivityFeed />
+
+    <div class="scada-grid">
+        <!-- Vehicle Operations -->
+        <GlassCard Class="scada-panel">
+            <div class="panel-header">
+                <h3><i class="fas fa-car"></i> Vehicle Ops</h3>
+                <div class="indicator active"></div>
+            </div>
+            <div class="panel-body">
+                <div class="control-group">
+                    <label>Arrival & Entry</label>
+                    <div class="btn-row">
+                        <button class="btn-scada btn-blue" @onclick="ViewModel.SimulateCarArrival">
+                            <i class="fas fa-bell"></i> Trigger Sensor
+                        </button>
+                        <button class="btn-scada btn-green" @onclick="ViewModel.SimulateCarEntry">
+                            <i class="fas fa-door-open"></i> Open Gate
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="control-group">
+                    <label>Manual Park/Exit</label>
+                    <div class="input-row">
+                        <input type="text" class="scada-input" placeholder="Slot ID" @bind="targetSlot" />
+                        <button class="btn-scada btn-cyan" @onclick="() => ViewModel.SimulateParking(targetSlot)">Park</button>
+                        <button class="btn-scada btn-orange" @onclick="() => ViewModel.SimulateExit(targetSlot)">Exit</button>
+                    </div>
+                </div>
+            </div>
+        </GlassCard>
+
+        <!-- Slot Management -->
+        <GlassCard Class="scada-panel">
+            <div class="panel-header">
+                <h3><i class="fas fa-th-large"></i> Slot Sensors</h3>
+                <div class="indicator active"></div>
+            </div>
+            <div class="panel-body">
+                <div class="control-group">
+                    <label>Sensor Overrides (@targetSlot)</label>
+                    <div class="btn-grid">
+                        <button class="btn-scada btn-red" @onclick="() => ViewModel.SetSlotOccupied(targetSlot)">
+                            <i class="fas fa-car-side"></i> Occupied
+                        </button>
+                        <button class="btn-scada btn-green" @onclick="() => ViewModel.SetSlotEmpty(targetSlot)">
+                            <i class="fas fa-check"></i> Empty
+                        </button>
+                        <button class="btn-scada btn-yellow span-2" @onclick="() => ViewModel.SetSlotFaulty(targetSlot)">
+                            <i class="fas fa-exclamation-triangle"></i> Simulate Fault
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </GlassCard>
+
+        <!-- Gate & Access -->
+        <GlassCard Class="scada-panel">
+            <div class="panel-header">
+                <h3><i class="fas fa-dungeon"></i> Gate Control</h3>
+                <div class="indicator active"></div>
+            </div>
+            <div class="panel-body">
+                <div class="gate-status">
+                    <div class="gate-icon">
+                        <i class="fas fa-torii-gate"></i>
+                    </div>
+                    <div class="gate-controls">
+                        <button class="btn-scada btn-purple" @onclick="ViewModel.ToggleGate">
+                            <i class="fas fa-sync"></i> Toggle Main Gate
+                        </button>
+                        <button class="btn-scada btn-red" @onclick="ViewModel.JamGate">
+                            <i class="fas fa-ban"></i> Simulate Jam
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </GlassCard>
+
+        <!-- Lighting & Environment -->
+        <GlassCard Class="scada-panel">
+            <div class="panel-header">
+                <h3><i class="fas fa-lightbulb"></i> Environment</h3>
+                <div class="indicator active"></div>
+            </div>
+            <div class="panel-body">
+                <button class="btn-scada btn-yellow mb-3" @onclick="ViewModel.ToggleLights">
+                    <i class="fas fa-power-off"></i> Toggle All Lights
+                </button>
+                <div class="btn-row">
+                    <button class="btn-scada btn-dark" @onclick="ViewModel.SetNightMode">
+                        <i class="fas fa-moon"></i> Night
+                    </button>
+                    <button class="btn-scada btn-cyan" @onclick="ViewModel.SetDayMode">
+                        <i class="fas fa-sun"></i> Day
+                    </button>
+                </div>
+            </div>
+        </GlassCard>
+
+        <!-- Emergency -->
+        <GlassCard Class="scada-panel danger-zone">
+            <div class="panel-header">
+                <h3><i class="fas fa-radiation"></i> Emergency</h3>
+                <div class="indicator blinking"></div>
+            </div>
+            <div class="panel-body">
+                <div class="btn-grid">
+                    <button class="btn-scada btn-danger" @onclick="ViewModel.TriggerFireAlarm">
+                        <i class="fas fa-fire"></i> FIRE ALARM
+                    </button>
+                    <button class="btn-scada btn-warning" @onclick="ViewModel.TriggerSecurityBreach">
+                        <i class="fas fa-user-secret"></i> BREACH
+                    </button>
+                    <button class="btn-scada btn-white span-2" @onclick="ViewModel.ResetSystem">
+                        <i class="fas fa-undo"></i> SYSTEM RESET
+                    </button>
+                </div>
+            </div>
+        </GlassCard>
+    </div>
+</div>
+
+<style>
+    .simulation-dashboard {
+        padding-bottom: 2rem;
+    }
+
+    .dashboard-header-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        margin-bottom: 2rem;
+    }
+
+    .header-actions {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .status-card {
+        padding: 0.5rem 1rem;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .scada-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.5rem;
+    }
+
+    .scada-panel {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
+
+    .panel-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+        padding-bottom: 0.75rem;
+        border-bottom: 1px solid var(--border-glass);
+    }
+
+    .panel-header h3 {
+        font-size: 1.1rem;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: var(--text-main);
+    }
+
+    .indicator {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #333;
+    }
+
+    .indicator.active {
+        background: var(--success);
+        box-shadow: 0 0 5px var(--success);
+    }
+
+    .indicator.blinking {
+        background: var(--danger);
+        animation: blink 1s infinite;
+    }
+
+    @@keyframes blink {
+        50% { opacity: 0.3; }
+    }
+
+    .control-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .control-group label {
+        display: block;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--text-muted);
+        margin-bottom: 0.5rem;
+    }
+
+    .btn-row {
+        display: flex;
+        gap: 0.75rem;
+    }
+
+    .btn-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.75rem;
+    }
+
+    .span-2 { grid-column: span 2; }
+
+    .input-row {
+        display: flex;
+        gap: 0.5rem;
+    }
+
+    .scada-input {
+        background: rgba(0, 0, 0, 0.2);
+        border: 1px solid var(--border-glass);
+        color: var(--text-main);
+        padding: 0.5rem;
+        border-radius: 4px;
+        width: 80px;
+        text-align: center;
+        font-family: monospace;
+    }
+
+    .btn-scada {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid var(--border-glass);
+        color: var(--text-main);
+        padding: 0.75rem;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: all 0.2s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        font-size: 0.9rem;
+        width: 100%;
+    }
+
+    .btn-scada:hover {
+        background: rgba(255, 255, 255, 0.1);
+        transform: translateY(-1px);
+    }
+
+    .btn-scada:active {
+        transform: translateY(0);
+    }
+
+    .btn-blue { border-color: rgba(59, 130, 246, 0.5); color: #60a5fa; }
+    .btn-blue:hover { background: rgba(59, 130, 246, 0.1); box-shadow: 0 0 10px rgba(59, 130, 246, 0.2); }
+
+    .btn-green { border-color: rgba(16, 185, 129, 0.5); color: #34d399; }
+    .btn-green:hover { background: rgba(16, 185, 129, 0.1); box-shadow: 0 0 10px rgba(16, 185, 129, 0.2); }
+
+    .btn-red { border-color: rgba(239, 68, 68, 0.5); color: #f87171; }
+    .btn-red:hover { background: rgba(239, 68, 68, 0.1); box-shadow: 0 0 10px rgba(239, 68, 68, 0.2); }
+
+    .btn-yellow { border-color: rgba(245, 158, 11, 0.5); color: #fbbf24; }
+    .btn-yellow:hover { background: rgba(245, 158, 11, 0.1); box-shadow: 0 0 10px rgba(245, 158, 11, 0.2); }
+
+    .btn-purple { border-color: rgba(139, 92, 246, 0.5); color: #a78bfa; }
+    .btn-purple:hover { background: rgba(139, 92, 246, 0.1); box-shadow: 0 0 10px rgba(139, 92, 246, 0.2); }
+
+    .btn-cyan { border-color: rgba(6, 182, 212, 0.5); color: #22d3ee; }
+    .btn-cyan:hover { background: rgba(6, 182, 212, 0.1); box-shadow: 0 0 10px rgba(6, 182, 212, 0.2); }
+    
+    .btn-orange { border-color: rgba(249, 115, 22, 0.5); color: #fb923c; }
+    .btn-orange:hover { background: rgba(249, 115, 22, 0.1); box-shadow: 0 0 10px rgba(249, 115, 22, 0.2); }
+
+    .btn-danger { background: rgba(220, 38, 38, 0.2); border-color: #ef4444; color: #fca5a5; }
+    .btn-danger:hover { background: rgba(220, 38, 38, 0.4); box-shadow: 0 0 15px rgba(239, 68, 68, 0.4); }
+
+    .danger-zone {
+        border-color: rgba(239, 68, 68, 0.3);
+        background: linear-gradient(145deg, rgba(239, 68, 68, 0.05), transparent);
+    }
+</style>
+
+@code {
+    private string targetSlot = "A-01";
+}

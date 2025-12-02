@@ -1,0 +1,21 @@
+@page "/logout"
+@using SmartParkingLot.Application.Services
+@using Microsoft.AspNetCore.Http
+@inject IAuthenticationService AuthService
+@inject IHttpContextAccessor HttpContextAccessor
+@inject NavigationManager Navigation
+
+@code {
+    protected override async Task OnInitializedAsync()
+    {
+        var userId = HttpContextAccessor.HttpContext?.Session.GetInt32("UserId");
+        
+        if (userId.HasValue)
+        {
+            await AuthService.LogoutAsync(userId.Value);
+        }
+
+        HttpContextAccessor.HttpContext?.Session.Clear();
+        Navigation.NavigateTo("/login", true);
+    }
+}

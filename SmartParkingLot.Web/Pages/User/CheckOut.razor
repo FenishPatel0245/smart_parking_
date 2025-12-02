@@ -1,0 +1,285 @@
+@page "/user/checkout"
+@using SmartParkingLot.Application.Services
+@using SmartParkingLot.Domain.Models
+@using SmartParkingLot.Web.Shared.Components
+@inject IParkingService ParkingService
+@inject NavigationManager Navigation
+
+<div class="checkout-page animate-fade-in">
+    <div class="wizard-container">
+        @if (currentStep == 1)
+        {
+            <GlassCard Class="wizard-step animate-slide-up">
+                <div class="step-header">
+                    <h2><i class="fas fa-sign-out-alt"></i> Vehicle Exit</h2>
+                    <p class="text-muted">Enter license plate to calculate fee</p>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">License Plate Number</label>
+                    <input class="form-control text-center text-lg font-bold" @bind="plateNumber" placeholder="ABC-123" />
+                </div>
+                
+                @if (!string.IsNullOrEmpty(errorMessage))
+                {
+                    <div class="alert-box badge-danger">
+                        <i class="fas fa-exclamation-triangle"></i> @errorMessage
+                    </div>
+                }
+
+                <div class="step-actions">
+                    <button class="btn-glass" @onclick="GoBack">Cancel</button>
+                    <button class="btn-primary" @onclick="CalculateFee" disabled="@(string.IsNullOrWhiteSpace(plateNumber) || isProcessing)">
+                        @if (isProcessing)
+                        {
+                            <span><i class="fas fa-spinner fa-spin"></i> Searching...</span>
+                        }
+                        else
+                        {
+                            <span>Search Ticket <i class="fas fa-search"></i></span>
+                        }
+                    </button>
+                </div>
+            </GlassCard>
+        }
+        else if (currentStep == 2)
+        {
+            <GlassCard Class="wizard-step animate-slide-up">
+                <div class="step-header">
+                    <h2><i class="fas fa-receipt"></i> Payment Due</h2>
+                    <p class="text-muted">Please settle the parking fee</p>
+                </div>
+
+                <div class="fee-display">
+                    <span class="currency">$</span>
+                    <span class="amount">@(ticket != null ? ticket.Fee.ToString("F2") : "0.00")</span>
+                </div>
+
+                <div class="ticket-details">
+                    <div class="detail-row">
+                        <span>Plate Number</span>
+                        <span class="font-bold">@ticket?.PlateNumber</span>
+                    </div>
+                    <div class="detail-row">
+                        <span>Duration</span>
+                        <span>@GetDuration()</span>
+                    </div>
+                </div>
+
+                <div class="payment-methods">
+                    <button class="btn-glass payment-btn" @onclick="ProcessPayment">
+                        <i class="fab fa-cc-visa"></i> Card
+                    </button>
+                    <button class="btn-glass payment-btn" @onclick="ProcessPayment">
+                        <i class="fab fa-apple-pay"></i> Apple Pay
+                    </button>
+                    <button class="btn-glass payment-btn" @onclick="ProcessPayment">
+                        <i class="fas fa-money-bill-wave"></i> Cash
+                    </button>
+                </div>
+
+                <div class="step-actions">
+                    <button class="btn-glass" @onclick="PrevStep">Back</button>
+                </div>
+            </GlassCard>
+        }
+        else if (currentStep == 3)
+        {
+            <GlassCard Class="wizard-step success-step animate-slide-up">
+                <div class="success-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h2>Payment Successful!</h2>
+                <p class="text-muted">Gate is opening. Have a safe trip!</p>
+
+                <div class="gate-animation">
+                    <div class="gate-arm"></div>
+                    <div class="car-icon"><i class="fas fa-car-side"></i></div>
+                </div>
+
+                <button class="btn-primary btn-block" @onclick="Finish">Done</button>
+            </GlassCard>
+        }
+    </div>
+</div>
+
+<style>
+    .checkout-page {
+        display: flex;
+        justify-content: center;
+        padding-top: 2rem;
+    }
+
+    .wizard-container {
+        width: 100%;
+        max-width: 500px;
+    }
+
+    .step-header {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
+    .fee-display {
+        text-align: center;
+        font-size: 3rem;
+        font-weight: 700;
+        color: var(--success);
+        margin-bottom: 2rem;
+        text-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+    }
+
+    .currency {
+        font-size: 1.5rem;
+        vertical-align: top;
+        margin-right: 0.25rem;
+    }
+
+    .ticket-details {
+        background: rgba(255, 255, 255, 0.05);
+        padding: 1rem;
+        border-radius: var(--radius-md);
+        margin-bottom: 2rem;
+    }
+
+    .detail-row {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 0.5rem;
+        color: var(--text-muted);
+    }
+
+    .payment-methods {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 1rem;
+        margin-bottom: 2rem;
+    }
+
+    .payment-btn {
+        flex-direction: column;
+        padding: 1.5rem 0.5rem;
+        gap: 0.5rem;
+    }
+
+    .payment-btn i {
+        font-size: 1.5rem;
+    }
+
+    .gate-animation {
+        height: 120px;
+        position: relative;
+        margin: 2rem 0;
+        border-bottom: 4px solid #333;
+    }
+
+    .gate-arm {
+        position: absolute;
+        bottom: 0;
+        right: 20px;
+        width: 10px;
+        height: 80px;
+        background: #ef4444;
+        transform-origin: bottom center;
+        animation: openGate 2s forwards;
+    }
+
+    .gate-arm::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -60px;
+        width: 60px;
+        height: 10px;
+        background: white;
+        transform-origin: right center;
+        transform: rotate(0deg);
+        animation: liftArm 2s forwards 0.5s;
+    }
+
+    .car-icon {
+        position: absolute;
+        bottom: 5px;
+        left: 0;
+        font-size: 2rem;
+        color: var(--primary);
+        animation: driveOut 3s forwards 1s;
+    }
+
+    @@keyframes liftArm {
+        to { transform: rotate(-90deg); }
+    }
+
+    @@keyframes driveOut {
+        to { left: 100%; opacity: 0; }
+    }
+
+    .step-actions {
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+    }
+
+    .success-icon {
+        font-size: 4rem;
+        color: var(--success);
+        margin-bottom: 1rem;
+        text-align: center;
+    }
+</style>
+
+@code {
+    private int currentStep = 1;
+    private string plateNumber = "";
+    private bool isProcessing = false;
+    private ParkingTicket? ticket;
+    private string errorMessage = "";
+
+    private async Task CalculateFee()
+    {
+        isProcessing = true;
+        errorMessage = "";
+        try
+        {
+            await Task.Delay(1000);
+            ticket = await ParkingService.CheckOutAsync(plateNumber);
+            currentStep = 2;
+        }
+        catch (Exception ex)
+        {
+            errorMessage = ex.Message;
+        }
+        finally
+        {
+            isProcessing = false;
+        }
+    }
+
+    private async Task ProcessPayment()
+    {
+        currentStep = 3;
+        await Task.Delay(500);
+    }
+
+    private string GetDuration()
+    {
+        if (ticket == null) return "0m";
+        var duration = (ticket.ExitTime ?? DateTime.UtcNow) - ticket.EntryTime;
+        return $"{(int)duration.TotalMinutes} min";
+    }
+
+    private void PrevStep()
+    {
+        currentStep--;
+    }
+
+    private void Finish()
+    {
+        Navigation.NavigateTo("/user/dashboard");
+    }
+
+    private void GoBack()
+    {
+        Navigation.NavigateTo("/user/dashboard");
+    }
+}

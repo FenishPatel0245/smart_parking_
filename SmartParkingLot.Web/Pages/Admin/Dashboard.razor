@@ -1,0 +1,388 @@
+@page "/admin/dashboard"
+@using SmartParkingLot.Application.Services
+@using SmartParkingLot.Application.DTOs
+@using SmartParkingLot.Application.ViewModels
+@using SmartParkingLot.Domain.Models
+@using SmartParkingLot.Web.Pages.Admin.Components
+@using SmartParkingLot.Web.Shared.Components
+@inject DashboardViewModel ViewModel
+@inject IAuthenticationService AuthService
+@inject NavigationManager Navigation
+@implements IDisposable
+
+@if (!isAuthorized)
+{
+    <div class="loading-screen">
+        <i class="fas fa-spinner fa-spin fa-2x"></i>
+    </div>
+}
+else
+{
+    <div class="admin-dashboard animate-fade-in">
+        <div class="dashboard-header-row">
+            <div>
+                <h1>Dashboard</h1>
+                <p class="text-muted">Overview of facility status and operations</p>
+            </div>
+            <div class="header-actions">
+                <GlassCard Class="auto-mode-card">
+                    <span class="label">Auto-Mode</span>
+                    <label class="switch">
+                        <input type="checkbox" checked="@ViewModel.IsAutoModeEnabled" @onchange="ToggleAutoMode">
+                        <span class="slider round"></span>
+                    </label>
+                </GlassCard>
+
+                <button class="btn-glass" @onclick='() => Navigation.NavigateTo("/admin/simulation")'>
+                    <i class="fas fa-microchip"></i> Simulation
+                </button>
+                
+                <div class="user-badge">
+                    <div class="avatar">
+                        <span>@GetInitials(fullName)</span>
+                    </div>
+                    <div class="user-details">
+                        <span class="name">@fullName</span>
+                        <span class="role">Administrator</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @if (!string.IsNullOrEmpty(ViewModel.ErrorMessage))
+        {
+            <div class="alert-box badge-danger mb-4">
+                <i class="fas fa-exclamation-circle"></i> @ViewModel.ErrorMessage
+            </div>
+        }
+
+
+
+        <ActivityFeed />
+        <AdminStats ViewModel="@ViewModel" />
+
+        <div class="dashboard-grid">
+            <div class="grid-main">
+                <AdminSlotGrid Slots="@ViewModel.ParkingSlots" OnSlotClick="HandleSlotClick" />
+            </div>
+            
+            <div class="grid-sidebar">
+                <GlassCard Class="alerts-card">
+                    <div class="card-header-glass">
+                        <h3><i class="fas fa-bell"></i> Recent Alerts</h3>
+                        <span class="badge-pill">@ViewModel.ActiveAlerts.Count</span>
+                    </div>
+                    
+                    <div class="alerts-list">
+                        @if (ViewModel.ActiveAlerts.Any())
+                        {
+                            @foreach (var alert in ViewModel.ActiveAlerts.Take(5))
+                            {
+                                <div class="alert-item animate-slide-in">
+                                    <div class="alert-icon @GetAlertClass(alert.Severity)">
+                                        <i class="fas fa-exclamation"></i>
+                                    </div>
+                                    <div class="alert-content">
+                                        <div class="alert-msg">@alert.Message</div>
+                                        <div class="alert-meta">
+                                            <span>@alert.DeviceName</span>
+                                            <span>@alert.CreatedAt.ToLocalTime().ToString("HH:mm")</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                            <div class="empty-state">
+                                <i class="far fa-check-circle"></i>
+                                <p>No active alerts</p>
+                            </div>
+                        }
+                    </div>
+                </GlassCard>
+
+                <GlassCard Class="system-card mt-4">
+                    <div class="card-header-glass">
+                        <h3><i class="fas fa-server"></i> System Status</h3>
+                    </div>
+                    <div class="system-stats">
+                        <div class="stat-row">
+                            <span>Devices Online</span>
+                            <span class="text-success">@ViewModel.Devices.Count(d => d.Status == "Normal") / @ViewModel.Devices.Count</span>
+                        </div>
+                        <div class="stat-row">
+                            <span>SignalR</span>
+                            <span class="text-success">Connected</span>
+                        </div>
+                        <div class="stat-row">
+                            <span>Last Update</span>
+                            <span>@DateTime.Now.ToString("HH:mm:ss")</span>
+                        </div>
+                    </div>
+                </GlassCard>
+            </div>
+        </div>
+    </div>
+}
+
+<style>
+    .admin-dashboard {
+        padding-bottom: 2rem;
+    }
+
+    .dashboard-header-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        margin-bottom: 2rem;
+    }
+
+    .header-actions {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+    }
+
+    .auto-mode-card {
+        padding: 0.5rem 1rem;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .user-badge {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+    }
+
+    .avatar {
+        width: 40px;
+        height: 40px;
+        background: var(--primary);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        color: white;
+        box-shadow: 0 0 10px var(--primary-glow);
+    }
+
+    .user-details {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .name { font-weight: 600; font-size: 0.9rem; }
+    .role { font-size: 0.75rem; color: var(--text-muted); }
+
+    .dashboard-grid {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: 1.5rem;
+    }
+
+    @@media (max-width: 1024px) {
+        .dashboard-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    .card-header-glass {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1rem;
+        padding-bottom: 0.75rem;
+        border-bottom: 1px solid var(--border-glass);
+    }
+
+    .card-header-glass h3 {
+        font-size: 1.1rem;
+        margin: 0;
+    }
+
+    .badge-pill {
+        background: var(--danger);
+        color: white;
+        padding: 0.1rem 0.5rem;
+        border-radius: 10px;
+        font-size: 0.75rem;
+        font-weight: 700;
+    }
+
+    .alerts-list {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        max-height: 400px;
+        overflow-y: auto;
+    }
+
+    .alert-item {
+        display: flex;
+        gap: 0.75rem;
+        padding: 0.75rem;
+        background: rgba(255, 255, 255, 0.03);
+        border-radius: var(--radius-sm);
+        border-left: 3px solid transparent;
+    }
+
+    .alert-icon {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        font-size: 0.8rem;
+    }
+
+    .alert-icon.danger { background: rgba(239, 68, 68, 0.2); color: var(--danger); border: 1px solid rgba(239, 68, 68, 0.3); }
+    .alert-icon.warning { background: rgba(245, 158, 11, 0.2); color: var(--warning); border: 1px solid rgba(245, 158, 11, 0.3); }
+    .alert-icon.info { background: rgba(59, 130, 246, 0.2); color: var(--info); border: 1px solid rgba(59, 130, 246, 0.3); }
+
+    .alert-content {
+        flex: 1;
+    }
+
+    .alert-msg {
+        font-size: 0.9rem;
+        margin-bottom: 0.25rem;
+    }
+
+    .alert-meta {
+        font-size: 0.75rem;
+        color: var(--text-muted);
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .empty-state {
+        text-align: center;
+        padding: 2rem;
+        color: var(--text-muted);
+    }
+
+    .empty-state i {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+        opacity: 0.5;
+    }
+
+    .system-stats {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .stat-row {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.9rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 1px dashed var(--border-glass);
+    }
+
+    .stat-row:last-child {
+        border-bottom: none;
+    }
+
+    /* Switch Toggle Styles (Reused) */
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 36px;
+        height: 20px;
+    }
+    
+    .switch input { opacity: 0; width: 0; height: 0; }
+    
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background-color: rgba(255, 255, 255, 0.2);
+        transition: .4s;
+    }
+    
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 14px;
+        width: 14px;
+        left: 3px;
+        bottom: 3px;
+        background-color: white;
+        transition: .4s;
+    }
+    
+    input:checked + .slider { background-color: var(--primary); }
+    input:checked + .slider:before { transform: translateX(16px); }
+    .slider.round { border-radius: 20px; }
+    .slider.round:before { border-radius: 50%; }
+</style>
+
+
+
+@code {
+    private bool isAuthorized = false;
+    private string fullName = "Admin";
+
+    private async Task ToggleAutoMode(ChangeEventArgs e)
+    {
+        bool isEnabled = (bool)(e.Value ?? false);
+        await ViewModel.ToggleAutoMode(isEnabled);
+    }
+
+    private void HandleSlotClick(ParkingSlot slot)
+    {
+        // Future: Show modal with details
+        Console.WriteLine($"Clicked slot {slot.SlotNumber}");
+    }
+
+    private string GetInitials(string name)
+    {
+        if (string.IsNullOrEmpty(name)) return "A";
+        var parts = name.Split(' ');
+        if (parts.Length > 1) return $"{parts[0][0]}{parts[1][0]}";
+        return name.Substring(0, 1);
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        ViewModel.OnStateChanged += StateHasChanged;
+
+        if (AuthService.CurrentUser != null)
+        {
+            fullName = AuthService.CurrentUser.FullName;
+        }
+
+        if (AuthService.CurrentUser == null || AuthService.CurrentUser.Role != "Admin")
+        {
+            Navigation.NavigateTo("/login");
+            return;
+        }
+
+        await ViewModel.InitializeAsync();
+        isAuthorized = true;
+    }
+
+    public void Dispose()
+    {
+        ViewModel.OnStateChanged -= StateHasChanged;
+    }
+
+    private string GetAlertClass(string severity)
+    {
+        return severity?.ToLower() switch
+        {
+            "critical" => "danger",
+            "warning" => "warning",
+            _ => "info"
+        };
+    }
+}

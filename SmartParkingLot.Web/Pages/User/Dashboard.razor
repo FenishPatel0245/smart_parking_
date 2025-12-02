@@ -1,0 +1,281 @@
+@page "/user/dashboard"
+@using SmartParkingLot.Application.Services
+@using SmartParkingLot.Domain.Models
+@using SmartParkingLot.Web.Shared.Components
+@inject IParkingService ParkingService
+@inject NavigationManager Navigation
+@inject SmartParkingLot.Application.Services.IAuthenticationService AuthService
+@implements IDisposable
+
+<div class="user-dashboard animate-fade-in">
+    <div class="dashboard-header">
+        <div>
+            <h1><i class="fas fa-parking text-primary"></i> Parking</h1>
+            <p class="text-muted">Select an action to proceed</p>
+        </div>
+        <div class="clock-display glass-panel">
+            <i class="far fa-clock text-accent"></i>
+            <span>@currentTime.ToString("HH:mm")</span>
+        </div>
+    </div>
+
+    @if (!string.IsNullOrEmpty(errorMessage))
+    {
+        <div class="alert alert-danger">
+            <pre>@errorMessage</pre>
+        </div>
+    }
+
+    <div class="stats-grid">
+        <GlassCard Class="stat-card">
+            <div class="stat-icon bg-primary-glow">
+                <i class="fas fa-car"></i>
+            </div>
+            <div class="stat-info">
+                <span class="stat-value">@GetAvailableCount("Regular")</span>
+                <span class="stat-label">Regular Available</span>
+            </div>
+        </GlassCard>
+
+        <GlassCard Class="stat-card">
+            <div class="stat-icon bg-success-glow">
+                <i class="fas fa-charging-station"></i>
+            </div>
+            <div class="stat-info">
+                <span class="stat-value">@GetAvailableCount("EV")</span>
+                <span class="stat-label">EV Available</span>
+            </div>
+        </GlassCard>
+
+        <GlassCard Class="stat-card">
+            <div class="stat-icon bg-warning-glow">
+                <i class="fas fa-wheelchair"></i>
+            </div>
+            <div class="stat-info">
+                <span class="stat-value">@GetAvailableCount("Accessible")</span>
+                <span class="stat-label">Accessible Available</span>
+            </div>
+        </GlassCard>
+    </div>
+
+    <div class="actions-grid">
+        <div class="action-card-wrapper" @onclick='() => Navigation.NavigateTo("/user/checkin")'>
+            <GlassCard Class="action-card hover-lift">
+                <div class="action-icon">
+                    <i class="fas fa-sign-in-alt"></i>
+                </div>
+                <h3>Check In</h3>
+                <p>Park your vehicle</p>
+                <div class="action-arrow">
+                    <i class="fas fa-arrow-right"></i>
+                </div>
+            </GlassCard>
+        </div>
+
+        <div class="action-card-wrapper" @onclick='() => Navigation.NavigateTo("/user/checkout")'>
+            <GlassCard Class="action-card hover-lift">
+                <div class="action-icon checkout">
+                    <i class="fas fa-sign-out-alt"></i>
+                </div>
+                <h3>Check Out</h3>
+                <p>Pay and exit</p>
+                <div class="action-arrow">
+                    <i class="fas fa-arrow-right"></i>
+                </div>
+            </GlassCard>
+        </div>
+    </div>
+</div>
+
+<style>
+    .user-dashboard {
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+
+    .dashboard-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+    }
+
+    .clock-display {
+        padding: 0.75rem 1.5rem;
+        font-size: 1.5rem;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        font-variant-numeric: tabular-nums;
+    }
+
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 3rem;
+    }
+
+    .stat-card {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        padding: 1.5rem;
+    }
+
+    .stat-icon {
+        width: 50px;
+        height: 50px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        color: white;
+    }
+
+    .bg-primary-glow { background: linear-gradient(135deg, var(--primary), var(--info)); box-shadow: 0 4px 12px var(--primary-glow); }
+    .bg-success-glow { background: linear-gradient(135deg, var(--success), #34d399); box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4); }
+    .bg-warning-glow { background: linear-gradient(135deg, var(--warning), #fbbf24); box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4); }
+
+    .stat-info {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .stat-value {
+        font-size: 1.75rem;
+        font-weight: 700;
+        line-height: 1.2;
+    }
+
+    .stat-label {
+        font-size: 0.875rem;
+        color: var(--text-muted);
+    }
+
+    .actions-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+    }
+
+    .action-card-wrapper {
+        cursor: pointer;
+    }
+
+    .action-card {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 3rem 2rem;
+        position: relative;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .action-card:hover {
+        border-color: var(--primary);
+        background: rgba(255, 255, 255, 0.05);
+    }
+
+    .action-icon {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        background: rgba(59, 130, 246, 0.1);
+        color: var(--primary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2.5rem;
+        margin-bottom: 1.5rem;
+        transition: var(--transition-normal);
+    }
+
+    .action-card:hover .action-icon {
+        transform: scale(1.1);
+        background: var(--primary);
+        color: white;
+        box-shadow: 0 0 20px var(--primary-glow);
+    }
+
+    .action-icon.checkout {
+        background: rgba(139, 92, 246, 0.1);
+        color: var(--secondary);
+    }
+
+    .action-card:hover .action-icon.checkout {
+        background: var(--secondary);
+        color: white;
+        box-shadow: 0 0 20px rgba(139, 92, 246, 0.5);
+    }
+
+    .action-card h3 {
+        font-size: 1.75rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .action-card p {
+        color: var(--text-muted);
+        margin-bottom: 2rem;
+    }
+
+    .action-arrow {
+        position: absolute;
+        bottom: 2rem;
+        right: 2rem;
+        opacity: 0;
+        transform: translateX(-10px);
+        transition: var(--transition-normal);
+        color: var(--text-muted);
+    }
+
+    .action-card:hover .action-arrow {
+        opacity: 1;
+        transform: translateX(0);
+        color: white;
+    }
+</style>
+
+@code {
+    private IEnumerable<ParkingSlot> slots = new List<ParkingSlot>();
+    private DateTime currentTime = DateTime.Now;
+    private System.Threading.Timer? timer;
+    private string? errorMessage;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            slots = await ParkingService.GetAllSlotsAsync();
+            timer = new System.Threading.Timer(_ =>
+            {
+                currentTime = DateTime.Now;
+                InvokeAsync(StateHasChanged);
+            }, null, 0, 1000);
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Error loading dashboard: {ex.Message} \n {ex.StackTrace}";
+            Console.WriteLine(errorMessage);
+        }
+    }
+
+    private int GetAvailableCount(string type)
+    {
+        if (slots == null) return 0;
+
+        if (type == "Regular")
+            return slots.Count(s => !s.IsOccupied && !s.IsReserved && s.Type != "EV" && s.Type != "Accessible");
+        
+        return slots.Count(s => !s.IsOccupied && !s.IsReserved && s.Type == type);
+    }
+
+    public void Dispose()
+    {
+        timer?.Dispose();
+    }
+}

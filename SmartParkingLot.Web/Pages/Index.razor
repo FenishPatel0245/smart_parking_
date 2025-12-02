@@ -1,0 +1,29 @@
+@page "/"
+@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+@inject NavigationManager Navigation
+
+@code {
+    protected override void OnInitialized()
+    {
+        var userId = HttpContextAccessor.HttpContext?.Session.GetInt32("UserId");
+        
+        if (userId.HasValue)
+        {
+            var role = HttpContextAccessor.HttpContext?.Session.GetString("UserRole");
+            
+            if (role == "Admin")
+            {
+                Navigation.NavigateTo("/admin/dashboard");
+            }
+            else
+            {
+                Navigation.NavigateTo("/user/dashboard");
+            }
+        }
+        else
+        {
+            Navigation.NavigateTo("/login");
+        }
+    }
+}

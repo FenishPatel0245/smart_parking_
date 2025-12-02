@@ -1,0 +1,9 @@
+C:\Users\Fenish\Downloads\final_best_proj\SmartParkingLot.Web\Program.cs(17,18): error CS1061: 'IServiceCollection' does not contain a definition for 'AddProtectedBrowserStorage' and no accessible extension method 'AddProtectedBrowserStorage' accepting a first argument of type 'IServiceCollection' could be found (are you missing a using directive or an assembly reference?) [C:\Users\Fenish\Downloads\final_best_proj\SmartParkingLot.Web\SmartParkingLot.Web.csproj]
+
+Build FAILED.
+    3 Warning(s)
+    1 Error(s)
+
+Time Elapsed 00:00:01.36
+
+Workload updates are available. Run `dotnet workload list` for more information.

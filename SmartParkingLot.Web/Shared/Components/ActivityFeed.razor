@@ -1,0 +1,230 @@
+@using SmartParkingLot.Application.Services
+@using SmartParkingLot.Domain.Models
+@inject IActivityLogService LogService
+@implements IDisposable
+
+<div class="activity-feed-container @(isCollapsed ? "collapsed" : "")">
+    <div class="feed-header">
+        <div class="header-title">
+            <i class="fas fa-history"></i>
+            <span>System Activity Feed</span>
+            @if (newEventsCount > 0)
+            {
+                <span class="badge-new">@newEventsCount new</span>
+            }
+        </div>
+        <div class="header-actions">
+            <button class="btn-icon" @onclick="ClearLogs" title="Clear Logs">
+                <i class="fas fa-trash-alt"></i>
+            </button>
+            <button class="btn-icon" @onclick="ToggleCollapse" title="@(isCollapsed ? "Expand" : "Collapse")">
+                <i class="fas @(isCollapsed ? "fa-chevron-down" : "fa-chevron-up")"></i>
+            </button>
+        </div>
+    </div>
+
+    @if (!isCollapsed)
+    {
+        <div class="feed-list">
+            @if (logs.Any())
+            {
+                @foreach (var log in logs)
+                {
+                    <div class="log-entry animate-slide-in @GetSeverityClass(log.Severity)">
+                        <div class="log-time">[@log.Timestamp.ToString("hh:mm:ss tt")]</div>
+                        <div class="log-icon">
+                            <i class="@log.Icon"></i>
+                        </div>
+                        <div class="log-content">
+                            <span class="log-title">@log.Title</span>
+                            <span class="log-desc">@log.Description</span>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <div class="empty-logs">
+                    <i class="fas fa-check-circle"></i>
+                    <span>No recent activity</span>
+                </div>
+            }
+        </div>
+    }
+</div>
+
+<style>
+    .activity-feed-container {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+        margin-bottom: 1.5rem;
+        overflow: hidden;
+        transition: all 0.3s ease;
+    }
+
+    .activity-feed-container.collapsed {
+        height: 50px;
+    }
+
+    .feed-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.75rem 1rem;
+        background: rgba(0, 0, 0, 0.2);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .header-title {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-weight: 600;
+        color: var(--text-primary);
+    }
+
+    .badge-new {
+        background: var(--primary);
+        color: white;
+        font-size: 0.7rem;
+        padding: 0.1rem 0.4rem;
+        border-radius: 10px;
+        animation: pulse 2s infinite;
+    }
+
+    .header-actions {
+        display: flex;
+        gap: 0.5rem;
+    }
+
+    .btn-icon {
+        background: transparent;
+        border: none;
+        color: var(--text-muted);
+        cursor: pointer;
+        transition: color 0.2s;
+    }
+
+    .btn-icon:hover {
+        color: var(--text-primary);
+    }
+
+    .feed-list {
+        max-height: 300px;
+        overflow-y: auto;
+        padding: 0.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .log-entry {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.5rem;
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.02);
+        font-size: 0.9rem;
+    }
+
+    .log-entry:hover {
+        background: rgba(255, 255, 255, 0.05);
+    }
+
+    .log-time {
+        font-family: monospace;
+        color: var(--text-muted);
+        font-size: 0.8rem;
+        min-width: 85px;
+    }
+
+    .log-icon {
+        width: 24px;
+        height: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.1);
+    }
+
+    .log-content {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+    }
+
+    .log-title {
+        font-weight: 600;
+        font-size: 0.85rem;
+    }
+
+    .log-desc {
+        font-size: 0.8rem;
+        color: var(--text-muted);
+    }
+
+    /* Severity Styles */
+    .log-entry.info .log-icon { color: var(--info); background: rgba(59, 130, 246, 0.1); }
+    .log-entry.success .log-icon { color: var(--success); background: rgba(16, 185, 129, 0.1); }
+    .log-entry.warning .log-icon { color: var(--warning); background: rgba(245, 158, 11, 0.1); }
+    .log-entry.error .log-icon { color: var(--danger); background: rgba(239, 68, 68, 0.1); }
+    .log-entry.critical .log-icon { color: var(--danger); background: rgba(239, 68, 68, 0.2); border: 1px solid var(--danger); }
+
+    @@keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.1); }
+        100% { transform: scale(1); }
+    }
+</style>
+
+@code {
+    private List<ActivityLogEntry> logs = new();
+    private bool isCollapsed = false;
+    private int newEventsCount = 0;
+
+    protected override void OnInitialized()
+    {
+        logs = LogService.GetLogs().ToList();
+        LogService.OnLogAdded += HandleLogAdded;
+    }
+
+    private void HandleLogAdded(ActivityLogEntry entry)
+    {
+        logs.Insert(0, entry);
+        if (isCollapsed)
+        {
+            newEventsCount++;
+        }
+        InvokeAsync(StateHasChanged);
+    }
+
+    private void ToggleCollapse()
+    {
+        isCollapsed = !isCollapsed;
+        if (!isCollapsed)
+        {
+            newEventsCount = 0;
+        }
+    }
+
+    private void ClearLogs()
+    {
+        LogService.ClearLogs();
+        logs.Clear();
+        newEventsCount = 0;
+    }
+
+    public void Dispose()
+    {
+        LogService.OnLogAdded -= HandleLogAdded;
+    }
+
+    private string GetSeverityClass(string severity)
+    {
+        return severity?.ToLower() ?? "info";
+    }
+}

@@ -1,0 +1,15 @@
+C:\Users\Fenish\Downloads\final_best_proj\ScadaMonitoring.Devices\bin\Debug\net8.0\ScadaMonitoring.Devices.deps.json
+C:\Users\Fenish\Downloads\final_best_proj\ScadaMonitoring.Devices\bin\Debug\net8.0\ScadaMonitoring.Devices.dll
+C:\Users\Fenish\Downloads\final_best_proj\ScadaMonitoring.Devices\bin\Debug\net8.0\ScadaMonitoring.Devices.pdb
+C:\Users\Fenish\Downloads\final_best_proj\ScadaMonitoring.Devices\bin\Debug\net8.0\ScadaMonitoring.Domain.dll
+C:\Users\Fenish\Downloads\final_best_proj\ScadaMonitoring.Devices\bin\Debug\net8.0\ScadaMonitoring.Domain.pdb
+C:\Users\Fenish\Downloads\final_best_proj\ScadaMonitoring.Devices\obj\Debug\net8.0\ScadaMonitoring.Devices.csproj.AssemblyReference.cache
+C:\Users\Fenish\Downloads\final_best_proj\ScadaMonitoring.Devices\obj\Debug\net8.0\ScadaMonitoring.Devices.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Fenish\Downloads\final_best_proj\ScadaMonitoring.Devices\obj\Debug\net8.0\ScadaMonitoring.Devices.AssemblyInfoInputs.cache
+C:\Users\Fenish\Downloads\final_best_proj\ScadaMonitoring.Devices\obj\Debug\net8.0\ScadaMonitoring.Devices.AssemblyInfo.cs
+C:\Users\Fenish\Downloads\final_best_proj\ScadaMonitoring.Devices\obj\Debug\net8.0\ScadaMonitoring.Devices.csproj.CoreCompileInputs.cache
+C:\Users\Fenish\Downloads\final_best_proj\ScadaMonitoring.Devices\obj\Debug\net8.0\ScadaMon.CF9AB2E0.Up2Date
+C:\Users\Fenish\Downloads\final_best_proj\ScadaMonitoring.Devices\obj\Debug\net8.0\ScadaMonitoring.Devices.dll
+C:\Users\Fenish\Downloads\final_best_proj\ScadaMonitoring.Devices\obj\Debug\net8.0\refint\ScadaMonitoring.Devices.dll
+C:\Users\Fenish\Downloads\final_best_proj\ScadaMonitoring.Devices\obj\Debug\net8.0\ScadaMonitoring.Devices.pdb
+C:\Users\Fenish\Downloads\final_best_proj\ScadaMonitoring.Devices\obj\Debug\net8.0\ref\ScadaMonitoring.Devices.dll

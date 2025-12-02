@@ -1,0 +1,39 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "SmartParkingLot.Devices/1.0.0": {
+        "dependencies": {
+          "SmartParkingLot.Domain": "1.0.0"
+        },
+        "runtime": {
+          "SmartParkingLot.Devices.dll": {}
+        }
+      },
+      "SmartParkingLot.Domain/1.0.0": {
+        "runtime": {
+          "SmartParkingLot.Domain.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "SmartParkingLot.Devices/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "SmartParkingLot.Domain/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

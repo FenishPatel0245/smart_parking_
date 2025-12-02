@@ -1,0 +1,95 @@
+@using SmartParkingLot.Application.ViewModels
+@using SmartParkingLot.Web.Shared.Components
+
+<div class="stats-row animate-slide-up">
+    <GlassCard Class="stat-card">
+        <div class="stat-icon bg-blue">
+            <i class="fas fa-parking"></i>
+        </div>
+        <div class="stat-content">
+            <h3>Total Slots</h3>
+            <div class="value">@ViewModel.TotalSlots</div>
+        </div>
+    </GlassCard>
+
+    <GlassCard Class="stat-card">
+        <div class="stat-icon bg-red">
+            <i class="fas fa-car"></i>
+        </div>
+        <div class="stat-content">
+            <h3>Occupied</h3>
+            <div class="value">@ViewModel.OccupiedSlots</div>
+        </div>
+    </GlassCard>
+
+    <GlassCard Class="stat-card">
+        <div class="stat-icon bg-green">
+            <i class="fas fa-check"></i>
+        </div>
+        <div class="stat-content">
+            <h3>Available</h3>
+            <div class="value">@ViewModel.AvailableSlots</div>
+        </div>
+    </GlassCard>
+
+    <GlassCard Class="stat-card">
+        <div class="stat-icon bg-purple">
+            <i class="fas fa-dollar-sign"></i>
+        </div>
+        <div class="stat-content">
+            <h3>Revenue</h3>
+            <div class="value">$@ViewModel.TotalRevenue.ToString("N0")</div>
+            <small class="text-success">+12% today</small>
+        </div>
+    </GlassCard>
+</div>
+
+<style>
+    .stats-row {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .stat-card {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        padding: 1.5rem;
+    }
+
+    .stat-icon {
+        width: 50px;
+        height: 50px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        color: white;
+    }
+
+    .bg-blue { background: linear-gradient(135deg, #3b82f6, #2563eb); box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4); }
+    .bg-red { background: linear-gradient(135deg, #ef4444, #dc2626); box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4); }
+    .bg-green { background: linear-gradient(135deg, #10b981, #059669); box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4); }
+    .bg-purple { background: linear-gradient(135deg, #8b5cf6, #7c3aed); box-shadow: 0 4px 12px rgba(139, 92, 246, 0.4); }
+
+    .stat-content h3 {
+        font-size: 0.875rem;
+        color: var(--text-muted);
+        margin-bottom: 0.25rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+
+    .stat-content .value {
+        font-size: 1.75rem;
+        font-weight: 700;
+        line-height: 1;
+    }
+</style>
+
+@code {
+    [Parameter] public DashboardViewModel ViewModel { get; set; } = default!;
+}

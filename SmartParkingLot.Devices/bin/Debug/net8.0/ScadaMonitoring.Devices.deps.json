@@ -1,0 +1,39 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "ScadaMonitoring.Devices/1.0.0": {
+        "dependencies": {
+          "ScadaMonitoring.Domain": "1.0.0"
+        },
+        "runtime": {
+          "ScadaMonitoring.Devices.dll": {}
+        }
+      },
+      "ScadaMonitoring.Domain/1.0.0": {
+        "runtime": {
+          "ScadaMonitoring.Domain.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "ScadaMonitoring.Devices/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "ScadaMonitoring.Domain/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

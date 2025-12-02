@@ -1,0 +1,227 @@
+@page "/login"
+@using SmartParkingLot.Application.Services
+@using SmartParkingLot.Application.DTOs
+@using SmartParkingLot.Web.Shared.Components
+@inject IAuthenticationService AuthService
+@inject NavigationManager Navigation
+
+<div class="login-page">
+    <div class="login-content animate-slide-up">
+        <GlassCard Class="login-card-glass">
+            <div class="login-header">
+                <div class="brand-icon-large">
+                    <i class="fas fa-parking"></i>
+                </div>
+                <h2>Welcome Back</h2>
+                <p class="text-muted">Sign in to access the Smart Parking System</p>
+            </div>
+
+            @if (!string.IsNullOrEmpty(errorMessage))
+            {
+                <div class="alert-box badge-danger animate-fade-in">
+                    <i class="fas fa-exclamation-circle"></i> @errorMessage
+                </div>
+            }
+
+            <EditForm Model="@loginRequest" OnValidSubmit="HandleLogin">
+                <div class="form-group">
+                    <label class="form-label" for="username">Username</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-user input-icon"></i>
+                        <input id="username" class="form-control with-icon" @bind="loginRequest.Username" @bind:event="oninput" placeholder="Enter username" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="password">Password</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-lock input-icon"></i>
+                        <input id="password" type="password" class="form-control with-icon" @bind="loginRequest.Password" @bind:event="oninput" placeholder="Enter password" />
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-primary btn-block btn-lg" disabled="@isLoading">
+                    @if (isLoading)
+                    {
+                        <span><i class="fas fa-spinner fa-spin"></i> Signing In...</span>
+                    }
+                    else
+                    {
+                        <span>Sign In <i class="fas fa-arrow-right"></i></span>
+                    }
+                </button>
+            </EditForm>
+
+            <div class="login-footer">
+                <p class="text-sm text-muted">Demo Credentials:</p>
+                <div class="credentials-grid">
+                    <div class="credential-item">
+                        <span class="role">Admin</span>
+                        <code class="code">admin / admin123</code>
+                    </div>
+                    <div class="credential-item">
+                        <span class="role">User</span>
+                        <code class="code">user / user123</code>
+                    </div>
+                </div>
+            </div>
+        </GlassCard>
+    </div>
+</div>
+
+<style>
+    .login-page {
+        min-height: calc(100vh - 100px); /* Adjust for header if needed, but login usually full screen */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+    }
+
+    .login-content {
+        width: 100%;
+        max-width: 420px;
+    }
+
+    .login-header {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
+    .brand-icon-large {
+        font-size: 3rem;
+        color: var(--primary);
+        margin-bottom: 1rem;
+        background: rgba(59, 130, 246, 0.1);
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 1.5rem auto;
+        box-shadow: 0 0 20px var(--primary-glow);
+    }
+
+    .login-header h2 {
+        font-size: 1.75rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .input-wrapper {
+        position: relative;
+    }
+
+    .input-icon {
+        position: absolute;
+        left: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--text-muted);
+        pointer-events: none;
+    }
+
+    .form-control.with-icon {
+        padding-left: 2.75rem;
+    }
+
+    .btn-block {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 1rem;
+        font-size: 1rem;
+        border-radius: var(--radius-md);
+        cursor: pointer;
+    }
+
+    .alert-box {
+        padding: 0.75rem 1rem;
+        border-radius: var(--radius-md);
+        margin-bottom: 1.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.9rem;
+    }
+
+    .login-footer {
+        margin-top: 2rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid var(--border-glass);
+        text-align: center;
+    }
+
+    .credentials-grid {
+        display: grid;
+        gap: 0.5rem;
+        margin-top: 0.5rem;
+    }
+
+    .credential-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: rgba(255, 255, 255, 0.03);
+        padding: 0.5rem 1rem;
+        border-radius: var(--radius-sm);
+        font-size: 0.85rem;
+    }
+
+    .role {
+        font-weight: 600;
+        color: var(--text-dim);
+    }
+
+    .code {
+        font-family: monospace;
+        color: var(--accent);
+    }
+</style>
+
+@code {
+    private LoginRequest loginRequest = new();
+    private string errorMessage = string.Empty;
+    private bool isLoading = false;
+
+    private async Task HandleLogin()
+    {
+        isLoading = true;
+        errorMessage = string.Empty;
+
+        try
+        {
+            // Simulate network delay for effect
+            await Task.Delay(800);
+
+            var response = await AuthService.LoginAsync(loginRequest);
+
+            if (response.Success && response.User != null)
+            {
+                // Redirect based on role
+                if (response.User.Role == "Admin")
+                {
+                    Navigation.NavigateTo("/admin/dashboard", false);
+                }
+                else
+                {
+                    Navigation.NavigateTo("/user/dashboard", false);
+                }
+            }
+            else
+            {
+                errorMessage = response.Message;
+            }
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Login error: {ex.Message}";
+        }
+        finally
+        {
+            isLoading = false;
+        }
+    }
+}
