@@ -12,6 +12,7 @@ public interface IAuthenticationService
     Task<UserDto?> GetUserByIdAsync(int userId);
     Task InitializeAsync();
     UserDto? CurrentUser { get; }
+    event Action? OnAuthStateChanged;
 }
 
 public class AuthenticationService : IAuthenticationService
@@ -86,9 +87,14 @@ public class AuthenticationService : IAuthenticationService
                 Message = $"Login failed: {ex.Message}"
             };
         }
+        finally
+        {
+            OnAuthStateChanged?.Invoke();
+        }
     }
 
     public UserDto? CurrentUser { get; private set; }
+    public event Action? OnAuthStateChanged;
 
     public async Task InitializeAsync()
     {
@@ -108,6 +114,10 @@ public class AuthenticationService : IAuthenticationService
         {
             Console.WriteLine($"Session restoration failed: {ex.Message}");
         }
+        finally
+        {
+            OnAuthStateChanged?.Invoke();
+        }
     }
 
     public async Task<bool> ValidateSessionAsync(int userId)
@@ -125,6 +135,7 @@ public class AuthenticationService : IAuthenticationService
         }
         CurrentUser = null;
         await _sessionStorage.DeleteAsync("authToken");
+        OnAuthStateChanged?.Invoke();
     }
 
     public async Task<UserDto?> GetUserByIdAsync(int userId)

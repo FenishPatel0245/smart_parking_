@@ -220,3 +220,4 @@ C:\Users\Fenish\Downloads\final_best_proj\SmartParkingLot.Tests\obj\Debug\net8.0
 C:\Users\Fenish\Downloads\final_best_proj\SmartParkingLot.Tests\obj\Debug\net8.0\SmartParkingLot.Tests.pdb
 C:\Users\Fenish\Downloads\final_best_proj\SmartParkingLot.Tests\obj\Debug\net8.0\SmartParkingLot.Tests.genruntimeconfig.cache
 C:\Users\Fenish\Downloads\final_best_proj\SmartParkingLot.Tests\obj\Debug\net8.0\ref\SmartParkingLot.Tests.dll
+C:\Users\Fenish\Downloads\final_best_proj\SmartParkingLot.Tests\obj\Debug\net8.0\SmartParkingLot.Tests.sourcelink.json

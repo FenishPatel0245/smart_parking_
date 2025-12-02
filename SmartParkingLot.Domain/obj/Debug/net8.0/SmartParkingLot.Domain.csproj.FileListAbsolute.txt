@@ -9,3 +9,4 @@ C:\Users\Fenish\Downloads\final_best_proj\SmartParkingLot.Domain\obj\Debug\net8.
 C:\Users\Fenish\Downloads\final_best_proj\SmartParkingLot.Domain\obj\Debug\net8.0\refint\SmartParkingLot.Domain.dll
 C:\Users\Fenish\Downloads\final_best_proj\SmartParkingLot.Domain\obj\Debug\net8.0\SmartParkingLot.Domain.pdb
 C:\Users\Fenish\Downloads\final_best_proj\SmartParkingLot.Domain\obj\Debug\net8.0\ref\SmartParkingLot.Domain.dll
+C:\Users\Fenish\Downloads\final_best_proj\SmartParkingLot.Domain\obj\Debug\net8.0\SmartParkingLot.Domain.sourcelink.json

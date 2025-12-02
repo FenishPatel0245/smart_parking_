@@ -17,3 +17,4 @@ C:\Users\Fenish\Downloads\final_best_proj\SmartParkingLot.Application\obj\Debug\
 C:\Users\Fenish\Downloads\final_best_proj\SmartParkingLot.Application\obj\Debug\net8.0\refint\SmartParkingLot.Application.dll
 C:\Users\Fenish\Downloads\final_best_proj\SmartParkingLot.Application\obj\Debug\net8.0\SmartParkingLot.Application.pdb
 C:\Users\Fenish\Downloads\final_best_proj\SmartParkingLot.Application\obj\Debug\net8.0\ref\SmartParkingLot.Application.dll
+C:\Users\Fenish\Downloads\final_best_proj\SmartParkingLot.Application\obj\Debug\net8.0\SmartParkingLot.Application.sourcelink.json

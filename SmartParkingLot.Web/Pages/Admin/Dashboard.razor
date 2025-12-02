@@ -1,4 +1,5 @@
 @page "/admin/dashboard"
+@attribute [Authorize(Roles = "Admin")]
 @using SmartParkingLot.Application.Services
 @using SmartParkingLot.Application.DTOs
 @using SmartParkingLot.Application.ViewModels
@@ -359,12 +360,6 @@ else
         if (AuthService.CurrentUser != null)
         {
             fullName = AuthService.CurrentUser.FullName;
-        }
-
-        if (AuthService.CurrentUser == null || AuthService.CurrentUser.Role != "Admin")
-        {
-            Navigation.NavigateTo("/login");
-            return;
         }
 
         await ViewModel.InitializeAsync();

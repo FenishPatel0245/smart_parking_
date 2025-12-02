@@ -19,6 +19,7 @@ public class ApplicationDbContext : DbContext
     public DbSet<Alert> Alerts { get; set; }
     public DbSet<EventLog> EventLogs { get; set; }
     public DbSet<ParkingSlot> ParkingSlots { get; set; }
+    public DbSet<ParkingTransaction> ParkingTransactions { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -93,6 +94,21 @@ public class ApplicationDbContext : DbContext
             entity.HasOne(e => e.Device)
                 .WithMany()
                 .HasForeignKey(e => e.DeviceId)
+                .OnDelete(DeleteBehavior.SetNull);
+        });
+
+        // ParkingTransaction configuration
+        modelBuilder.Entity<ParkingTransaction>(entity =>
+        {
+            entity.HasKey(e => e.Id);
+            entity.HasIndex(e => e.TransactionDate);
+            entity.Property(e => e.Amount).HasColumnType("decimal(18,2)");
+            entity.Property(e => e.PaymentMethod).HasMaxLength(50);
+            entity.Property(e => e.Status).HasMaxLength(20);
+
+            entity.HasOne(e => e.ParkingSlot)
+                .WithMany()
+                .HasForeignKey(e => e.ParkingSlotId)
                 .OnDelete(DeleteBehavior.SetNull);
         });
 

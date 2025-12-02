@@ -7,7 +7,9 @@ using SmartParkingLot.Application.Services;
 using SmartParkingLot.Application.DesignPatterns;
 using SmartParkingLot.Application.ViewModels;
 using SmartParkingLot.Web.Hubs;
+using SmartParkingLot.Web.Hubs;
 using SmartParkingLot.Web.Services;
+using Microsoft.AspNetCore.Components.Authorization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,6 +32,7 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<ITelemetryRepository, TelemetryRepository>();
 builder.Services.AddScoped<IAlertRepository, AlertRepository>();
 builder.Services.AddScoped<IEventLogRepository, EventLogRepository>();
+builder.Services.AddScoped<IParkingTransactionRepository, ParkingTransactionRepository>();
 
 // Design Patterns
 builder.Services.AddSingleton<IDeviceFactory, DeviceFactory>();
@@ -47,6 +50,7 @@ builder.Services.AddScoped<ISimulationService, SimulationService>();
 builder.Services.AddScoped<IBroadcastService, SmartParkingLot.Web.Services.SignalRBroadcastService>();
 builder.Services.AddScoped<ISessionStorageService, SessionStorageService>();
 builder.Services.AddScoped<IActivityLogService, ActivityLogService>();
+builder.Services.AddScoped<IRevenueService, RevenueService>();
 
 
 // ViewModels
@@ -63,6 +67,10 @@ builder.Services.AddSession(options =>
 });
 
 builder.Services.AddHttpContextAccessor();
+
+// Authentication & Authorization
+builder.Services.AddAuthorizationCore();
+builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
 
 var app = builder.Build();
 

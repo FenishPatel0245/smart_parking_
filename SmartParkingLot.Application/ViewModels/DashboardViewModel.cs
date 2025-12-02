@@ -17,7 +17,7 @@ public class DashboardViewModel
     public int TotalSlots => ParkingSlots.Count;
     public int OccupiedSlots => ParkingSlots.Count(s => s.IsOccupied);
     public int AvailableSlots => ParkingSlots.Count(s => !s.IsOccupied && !s.IsMaintenance);
-    public decimal TotalRevenue => 1250.00m; // Simulated for now
+    public decimal TotalRevenue { get; private set; } = 0m;
 
     public bool IsAutoModeEnabled 
     { 
@@ -29,15 +29,18 @@ public class DashboardViewModel
     public event Action? OnStateChanged;
 
     private readonly IActivityLogService _logService;
+    private readonly IRevenueService _revenueService;
 
     public DashboardViewModel(
         IServiceScopeFactory scopeFactory,
         ISystemStateService systemState,
-        IActivityLogService logService)
+        IActivityLogService logService,
+        IRevenueService revenueService)
     {
         _scopeFactory = scopeFactory;
         _systemState = systemState;
         _logService = logService;
+        _revenueService = revenueService;
     }
 
     public async Task InitializeAsync()
@@ -60,6 +63,7 @@ public class DashboardViewModel
                 Devices = (await deviceService.GetAllDevicesAsync()).ToList();
                 ActiveAlerts = (await alertService.GetUnacknowledgedAlertsAsync()).ToList();
                 ParkingSlots = (await deviceService.GetParkingSlotsAsync()).ToList();
+                TotalRevenue = await _revenueService.GetTotalRevenueAsync();
             }
             
             NotifyStateChanged();
