@@ -77,6 +77,7 @@ namespace SmartParkingLot.Application.ViewModels
             });
         }
 
+        // Fault and Maintenance Commands
         public async Task SetSlotFaulty(string slot)
         {
             await Execute($"Slot {slot} Faulty", async () => 

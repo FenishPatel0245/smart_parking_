@@ -2825,23 +2825,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Fenish\\.nuget\\packages\\": {},
+    "C:\\Users\\darsh\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Fenish\\Downloads\\final_best_proj\\SmartParkingLot.Application\\SmartParkingLot.Application.csproj",
+      "projectUniqueName": "C:\\Users\\darsh\\OneDrive\\Desktop\\smart_parking_lot_\\SmartParkingLot.Application\\SmartParkingLot.Application.csproj",
       "projectName": "SmartParkingLot.Application",
-      "projectPath": "C:\\Users\\Fenish\\Downloads\\final_best_proj\\SmartParkingLot.Application\\SmartParkingLot.Application.csproj",
-      "packagesPath": "C:\\Users\\Fenish\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Fenish\\Downloads\\final_best_proj\\SmartParkingLot.Application\\obj\\",
+      "projectPath": "C:\\Users\\darsh\\OneDrive\\Desktop\\smart_parking_lot_\\SmartParkingLot.Application\\SmartParkingLot.Application.csproj",
+      "packagesPath": "C:\\Users\\darsh\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\darsh\\OneDrive\\Desktop\\smart_parking_lot_\\SmartParkingLot.Application\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\Fenish\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\darsh\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -2857,14 +2857,14 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\Fenish\\Downloads\\final_best_proj\\SmartParkingLot.Devices\\SmartParkingLot.Devices.csproj": {
-              "projectPath": "C:\\Users\\Fenish\\Downloads\\final_best_proj\\SmartParkingLot.Devices\\SmartParkingLot.Devices.csproj"
+            "C:\\Users\\darsh\\OneDrive\\Desktop\\smart_parking_lot_\\SmartParkingLot.Devices\\SmartParkingLot.Devices.csproj": {
+              "projectPath": "C:\\Users\\darsh\\OneDrive\\Desktop\\smart_parking_lot_\\SmartParkingLot.Devices\\SmartParkingLot.Devices.csproj"
             },
-            "C:\\Users\\Fenish\\Downloads\\final_best_proj\\SmartParkingLot.Domain\\SmartParkingLot.Domain.csproj": {
-              "projectPath": "C:\\Users\\Fenish\\Downloads\\final_best_proj\\SmartParkingLot.Domain\\SmartParkingLot.Domain.csproj"
+            "C:\\Users\\darsh\\OneDrive\\Desktop\\smart_parking_lot_\\SmartParkingLot.Domain\\SmartParkingLot.Domain.csproj": {
+              "projectPath": "C:\\Users\\darsh\\OneDrive\\Desktop\\smart_parking_lot_\\SmartParkingLot.Domain\\SmartParkingLot.Domain.csproj"
             },
-            "C:\\Users\\Fenish\\Downloads\\final_best_proj\\SmartParkingLot.Infrastructure\\SmartParkingLot.Infrastructure.csproj": {
-              "projectPath": "C:\\Users\\Fenish\\Downloads\\final_best_proj\\SmartParkingLot.Infrastructure\\SmartParkingLot.Infrastructure.csproj"
+            "C:\\Users\\darsh\\OneDrive\\Desktop\\smart_parking_lot_\\SmartParkingLot.Infrastructure\\SmartParkingLot.Infrastructure.csproj": {
+              "projectPath": "C:\\Users\\darsh\\OneDrive\\Desktop\\smart_parking_lot_\\SmartParkingLot.Infrastructure\\SmartParkingLot.Infrastructure.csproj"
             }
           }
         }
