@@ -2,6 +2,7 @@ using SmartParkingLot.Domain.Models;
 
 namespace SmartParkingLot.Application.DTOs;
 
+// TODO: Implement DTO mappings (e.g., AutoMapper or extension methods)
 public class LoginRequest
 {
     public string Username { get; set; } = string.Empty;
