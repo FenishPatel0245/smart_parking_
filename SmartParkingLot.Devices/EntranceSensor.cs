@@ -2,6 +2,7 @@ using SmartParkingLot.Domain.Enums;
 
 namespace SmartParkingLot.Devices;
 
+// summary
 public class EntranceSensor : BaseDevice
 {
     public bool CarDetected { get; private set; }
