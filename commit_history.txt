@@ -1,0 +1,300 @@
+﻿[Darshita] Implement hover effects to buttons
+[Fenish] Implement entity relationships
+[Amna] Create admin dashboard widgets
+[Darshita] Design login page
+[Pratham] Implement flaky test in payment service
+[Darshita] Refactor form validation UI
+[Fenish] Refactor health checks
+[Amna] Add breadcrumb navigation
+[Pratham] Add assert statement in repository test
+[Fenish] Configure dependency injection
+[Fenish] Handle global exceptions
+[Darshita] Style parking slot component
+[Amna] Optimize browser compatibility issue
+[Darshita] Refactor hover effects to buttons
+[Darshita] Optimize color palette
+[Pratham] Fix unit tests for parking service
+[Darshita] Style parking slot component
+[Fenish] Remove generic repository pattern
+[Darshita] Optimize mobile view alignment
+[Fenish] Add DTO mappings
+[Pratham] Refactor test setup
+[Fenish] Update folder structure
+[Fenish] Update datetime offset issue
+[Amna] Fix layout shift on load
+[Pratham] Refactor unit tests for parking service
+[Darshita] Remove responsive grid for dashboard
+[Fenish] Update entity relationships
+[Darshita] Refactor color palette
+[Fenish] Implement database context
+[Fenish] Update refresh token logic
+[Darshita] Refactor loading spinner
+[Darshita] Remove sidebar navigation
+[Fenish] Add payment gateway integration
+[Fenish] Optimize role-based authorization
+[Amna] Update text contrast ratio
+[Darshita] Style parking slot component
+[Fenish] Update parking service
+[Amna] Optimize card component styles
+[Fenish] Fix DTO mappings
+[Darshita] Optimize CSS overflow issue
+[Amna] Implement card component styles
+[Pratham] Check memory leaks in background service
+[Pratham] Implement failing test in auth controller
+[Darshita] Create footer component
+[Fenish] Configure dependency injection
+[Darshita] Style parking slot component
+[Pratham] Update regression tests for booking
+[Amna] Fix breadcrumb navigation
+[Darshita] Fix form validation UI
+[Amna] Implement modal close behavior
+[Amna] Remove charts for revenue
+[Pratham] Optimize regression tests for booking
+[Fenish] Configure dependency injection
+[Pratham] Optimize regression tests for booking
+[Fenish] Configure Swagger documentation
+[Amna] Style payment confirmation page
+[Darshita] Fix padding on container
+[Pratham] Add boundary value analysis tests
+[Fenish] Optimize API response time
+[Darshita] Style parking slot component
+[Fenish] Remove health checks
+[Darshita] Style parking slot component
+[Pratham] Implement performance test for dashboard
+[Fenish] Update payment gateway integration
+[Amna] Update charts for revenue
+[Amna] Update browser compatibility issue
+[Fenish] Fix refresh token logic
+[Pratham] Verify signalR message broadcasting
+[Darshita] Refactor transition animations
+[Amna] Update button disabled state
+[Amna] Implement image assets
+[Darshita] Fix sidebar navigation
+[Darshita] Design user profile page
+[Pratham] Refactor test data generator
+[Pratham] Optimize assert statement in repository test
+[Fenish] Add role-based authorization
+[Fenish] Optimize role-based authorization
+[Amna] Implement button disabled state
+[Fenish] Fix unit of work
+[Fenish] Fix NuGet packages
+[Darshita] Style parking slot component
+[Amna] Add modal close behavior
+[Fenish] Refactor payment gateway integration
+[Darshita] Update form validation UI
+[Pratham] Verify role permissions
+[Darshita] Create main layout structure
+[Amna] Optimize search bar functionality
+[Pratham] Mock database context for testing
+[Pratham] Optimize test data generator
+[Darshita] Remove sidebar navigation
+[Fenish] Remove migration for parking slots
+[Darshita] Add logo and branding
+[Fenish] Remove database queries
+[Darshita] Add CSS overflow issue
+[Darshita] Update toast notifications
+[Amna] Implement filter and sort to lists
+[Darshita] Design user profile page
+[Darshita] Design user profile page
+[Darshita] Implement toast notifications
+[Pratham] Remove flaky test in payment service
+[Pratham] Implement flaky test in payment service
+[Darshita] Design login page
+[Amna] Design booking history table
+[Fenish] Update generic repository pattern
+[Pratham] Add code coverage report
+[Amna] Fix charts for revenue
+[Fenish] Clean up unused namespaces
+[Darshita] Refactor hover effects to buttons
+[Amna] Remove modal close behavior
+[Amna] Remove filter and sort to lists
+[Fenish] Configure Swagger documentation
+[Fenish] Fix role-based authorization
+[Darshita] Refactor padding on container
+[Pratham] Add boundary value analysis tests
+[Amna] Style dropdown menus
+[Pratham] Verify signalR message broadcasting
+[Darshita] Update transition animations
+[Darshita] Fix responsive grid for dashboard
+[Pratham] Update integration tests for user flow
+[Pratham] Implement test setup
+[Amna] Remove browser compatibility issue
+[Amna] Style payment confirmation page
+[Darshita] Optimize responsive grid for dashboard
+[Pratham] Remove regression tests for booking
+[Darshita] Refactor loading spinner
+[Amna] Implement breadcrumb navigation
+[Amna] Create admin dashboard widgets
+[Amna] Add icon set
+[Amna] Update drag and drop for layout
+[Darshita] Implement loading spinner
+[Darshita] Design user profile page
+[Pratham] Remove flaky test in payment service
+[Darshita] Refactor loading spinner
+[Fenish] Update database queries
+[Amna] Remove modal close behavior
+[Pratham] Add typo in test description
+[Fenish] Clean up unused namespaces
+[Fenish] Update datetime offset issue
+[Darshita] Update toast notifications
+[Pratham] Refactor boundary value analysis tests
+[Fenish] Fix migration for parking slots
+[Amna] Design settings page
+[Darshita] Add form validation UI
+[Darshita] Design user profile page
+[Fenish] Implement user registration logic
+[Fenish] Optimize signalR hub for real-time updates
+[Fenish] Remove validation pipeline behavior
+[Fenish] Implement seed data generation
+[Fenish] Implement connection string issue
+[Pratham] Remove boundary value analysis tests
+[Darshita] Style parking slot component
+[Darshita] Add responsive grid for dashboard
+[Darshita] Add toast notifications
+[Amna] Remove button disabled state
+[Fenish] Handle global exceptions
+[Darshita] Optimize font family
+[Pratham] Check memory leaks in background service
+[Fenish] Optimize email notification service
+[Darshita] Update logo and branding
+[Pratham] Optimize typo in test description
+[Amna] Optimize browser compatibility issue
+[Fenish] Configure Swagger documentation
+[Pratham] Fix test data generator
+[Amna] Refactor charts for revenue
+[Darshita] Design login page
+[Darshita] Remove mobile view alignment
+[Fenish] Remove user registration logic
+[Darshita] Remove dark mode toggle
+[Amna] Design 404 error page
+[Fenish] Handle global exceptions
+[Amna] Create admin dashboard widgets
+[Amna] Refactor charts for revenue
+[Darshita] Design user profile page
+[Pratham] Verify signalR message broadcasting
+[Darshita] Create footer component
+[Pratham] Fix load testing script
+[Fenish] Refactor entity relationships
+[Darshita] Optimize hover effects to buttons
+[Darshita] Update sidebar navigation
+[Darshita] Design login page
+[Darshita] Refactor CSS overflow issue
+[Amna] Update browser compatibility issue
+[Fenish] Optimize role-based authorization
+[Fenish] Refactor migration for parking slots
+[Amna] Optimize modal close behavior
+[Fenish] Remove API response time
+[Amna] Remove breadcrumb navigation
+[Pratham] Optimize flaky test in payment service
+[Pratham] Implement test setup
+[Fenish] Fix migration for parking slots
+[Darshita] Implement font family
+[Pratham] Validate input sanitization
+[Pratham] Verify signalR message broadcasting
+[Darshita] Update form validation UI
+[Fenish] Refactor API response time
+[Amna] Add tooltip to status icons
+[Amna] Update card component styles
+[Amna] Update image assets
+[Darshita] Design user profile page
+[Fenish] Update health checks
+[Darshita] Optimize color palette
+[Fenish] Handle global exceptions
+[Fenish] Update database queries
+[Amna] Optimize image assets
+[Amna] Remove text contrast ratio
+[Amna] Refactor drag and drop for layout
+[Darshita] Update responsive grid for dashboard
+[Darshita] Style parking slot component
+[Amna] Create admin dashboard widgets
+[Pratham] Check memory leaks in background service
+[Darshita] Implement logo and branding
+[Fenish] Configure Swagger documentation
+[Amna] Fix button disabled state
+[Fenish] Update payment gateway integration
+[Fenish] Update database context
+[Darshita] Fix logo and branding
+[Pratham] Verify role permissions
+[Darshita] Remove z-index issue on modal
+[Fenish] Add generic repository pattern
+[Pratham] Refactor test setup
+[Amna] Update layout shift on load
+[Darshita] Refactor form validation UI
+[Amna] Design settings page
+[Fenish] Implement signalR hub for real-time updates
+[Pratham] Optimize failing test in auth controller
+[Pratham] Implement test data generator
+[Pratham] Fix assert statement in repository test
+[Pratham] Verify role permissions
+[Darshita] Refactor sidebar navigation
+[Amna] Design booking history table
+[Pratham] Check memory leaks in background service
+[Fenish] Configure dependency injection
+[Fenish] Implement entity relationships
+[Fenish] Remove health checks
+[Fenish] Configure dependency injection
+[Fenish] Add entity relationships
+[Darshita] Create main layout structure
+[Amna] Design settings page
+[Fenish] Remove folder structure
+[Amna] Update image assets
+[Darshita] Style parking slot component
+[Darshita] Remove transition animations
+[Fenish] Update datetime offset issue
+[Amna] Design settings page
+[Fenish] Handle global exceptions
+[Fenish] Update payment gateway integration
+[Fenish] Implement validation pipeline behavior
+[Amna] Remove image assets
+[Darshita] Refactor logo and branding
+[Darshita] Fix transition animations
+[Fenish] Update migration for parking slots
+[Fenish] Implement role-based authorization
+[Amna] Remove button disabled state
+[Amna] Design booking history table
+[Amna] Fix button disabled state
+[Fenish] Implement entity relationships
+[Amna] Update drag and drop for layout
+[Darshita] Fix font family
+[Pratham] Fix assert statement in repository test
+[Amna] Fix button disabled state
+[Fenish] Fix datetime offset issue
+[Pratham] Verify signalR message broadcasting
+[Darshita] Implement dark mode toggle
+[Pratham] Add load testing script
+[Fenish] Create login endpoint
+[Amna] Style dropdown menus
+[Fenish] Remove role-based authorization
+[Amna] Update card component styles
+[Amna] Remove tooltip to status icons
+[Fenish] Fix datetime offset issue
+[Pratham] Refactor performance test for dashboard
+[Fenish] Update NuGet packages
+[Fenish] Fix folder structure
+[Amna] Refactor text contrast ratio
+[Darshita] Remove z-index issue on modal
+[Amna] Remove icon set
+[Amna] Create admin dashboard widgets
+[Darshita] Optimize responsive grid for dashboard
+[Amna] Fix tooltip to status icons
+[Amna] Update image assets
+[Fenish] Update parking service
+[Darshita] Create main layout structure
+[Darshita] Update loading spinner
+[Pratham] Add test setup
+[Amna] Style payment confirmation page
+[Darshita] Remove logo and branding
+[Darshita] Optimize CSS overflow issue
+[Darshita] Style parking slot component
+[Pratham] Implement negative test cases for login
+[Amna] Remove breadcrumb navigation
+[Amna] Style payment confirmation page
+[Fenish] Handle global exceptions
+[Pratham] Implement test data generator
+[Amna] Implement filter and sort to lists
+[Fenish] Add entity relationships
+[Darshita] Add transition animations
+[Amna] Design 404 error page
+[Fenish] Clean up unused namespaces
+[Darshita] Implement padding on container
+[Darshita] Implement toast notifications

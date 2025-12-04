@@ -26,6 +26,8 @@ public class ApplicationDbContext : DbContext
         base.OnModelCreating(modelBuilder);
 
         // User configuration
+        // Defines the schema and constraints for the User entity
+
         modelBuilder.Entity<User>(entity =>
         {
             entity.HasKey(e => e.Id);
@@ -47,11 +49,15 @@ public class ApplicationDbContext : DbContext
             entity.Property(e => e.TelemetryFilePath).HasMaxLength(500);
             entity.Property(e => e.Unit).HasMaxLength(20);
             
+            // One-to-Many relationship: Device -> TelemetryReadings
+            // A device can have multiple telemetry readings
             entity.HasMany(e => e.TelemetryReadings)
                 .WithOne(e => e.Device)
                 .HasForeignKey(e => e.DeviceId)
                 .OnDelete(DeleteBehavior.Cascade);
                 
+            // One-to-Many relationship: Device -> Alerts
+            // A device can generate multiple alerts
             entity.HasMany(e => e.Alerts)
                 .WithOne(e => e.Device)
                 .HasForeignKey(e => e.DeviceId)
@@ -72,6 +78,8 @@ public class ApplicationDbContext : DbContext
             entity.HasIndex(e => new { e.DeviceId, e.CreatedAt });
             entity.Property(e => e.Message).IsRequired().HasMaxLength(500);
             
+            // Many-to-One relationship: Alert -> User
+            // An alert is acknowledged by a specific user (optional)
             entity.HasOne(e => e.AcknowledgedByUser)
                 .WithMany()
                 .HasForeignKey(e => e.AcknowledgedByUserId)
@@ -86,6 +94,8 @@ public class ApplicationDbContext : DbContext
             entity.Property(e => e.EventType).IsRequired().HasMaxLength(50);
             entity.Property(e => e.Description).IsRequired().HasMaxLength(1000);
             
+            // Many-to-One relationship: EventLog -> User
+            // An event log entry is associated with a user (optional)
             entity.HasOne(e => e.User)
                 .WithMany()
                 .HasForeignKey(e => e.UserId)
@@ -106,6 +116,8 @@ public class ApplicationDbContext : DbContext
             entity.Property(e => e.PaymentMethod).HasMaxLength(50);
             entity.Property(e => e.Status).HasMaxLength(20);
 
+            // Many-to-One relationship: ParkingTransaction -> ParkingSlot
+            // A transaction is linked to a specific parking slot
             entity.HasOne(e => e.ParkingSlot)
                 .WithMany()
                 .HasForeignKey(e => e.ParkingSlotId)
