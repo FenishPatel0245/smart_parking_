@@ -7,6 +7,7 @@ public class SmartLighting : BaseDevice
     public bool IsOn { get; private set; }
     public double BrightnessLevel { get; private set; } // 0-100%
 
+
     // Constructor
     public SmartLighting()
     {
