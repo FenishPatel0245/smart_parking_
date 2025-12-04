@@ -27,6 +27,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlite($"Data Source={dbPath}"));
 
 // Repositories
+// Registers repository implementations for data access
+// Scoped lifetime: Created once per client request (connection)
 builder.Services.AddScoped<IDeviceRepository, DeviceRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<ITelemetryRepository, TelemetryRepository>();
@@ -35,11 +37,14 @@ builder.Services.AddScoped<IEventLogRepository, EventLogRepository>();
 builder.Services.AddScoped<IParkingTransactionRepository, ParkingTransactionRepository>();
 
 // Design Patterns
+// Registers design pattern implementations
+// Singleton lifetime: Created the first time they are requested
 builder.Services.AddSingleton<IDeviceFactory, DeviceFactory>();
 builder.Services.AddSingleton<IDeviceSubject, DeviceSubject>();
 builder.Services.AddSingleton<IAlertStrategy, ThresholdAlertStrategy>();
 
 // Services
+// Registers application services containing business logic
 builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
 builder.Services.AddScoped<IDeviceManagementService, DeviceManagementService>();
 builder.Services.AddScoped<ITelemetryService, TelemetryService>();
@@ -54,6 +59,7 @@ builder.Services.AddScoped<IRevenueService, RevenueService>();
 
 
 // ViewModels
+// Registers ViewModels for Blazor components
 builder.Services.AddScoped<DashboardViewModel>();
 builder.Services.AddScoped<SimulationViewModel>();
 
