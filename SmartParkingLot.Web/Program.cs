@@ -58,6 +58,11 @@ builder.Services.AddScoped<DashboardViewModel>();
 builder.Services.AddScoped<SimulationViewModel>();
 
 builder.Services.AddSingleton<ISystemStateService, SystemStateService>();
+
+// Health Checks
+// Adds health check services to the container to monitor application health
+builder.Services.AddHealthChecks();
+
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>
 {
@@ -96,6 +101,11 @@ app.UseSession();
 
 app.MapBlazorHub();
 app.MapHub<TelemetryHub>("/telemetryhub");
+
+// Health Check Endpoint
+// Maps the health check endpoint to /health for external monitoring
+app.MapHealthChecks("/health");
+
 app.MapFallbackToPage("/_Host");
 
 app.Run();
