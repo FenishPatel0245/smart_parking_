@@ -14,6 +14,7 @@ public class SlotSensor : BaseDevice
         IsControllable = false;
     }
 
+
     public override async Task<double> ReadTelemetryAsync()
     {
         // Simulate slot occupancy changes
