@@ -19,6 +19,7 @@ public class DashboardViewModel
     public int AvailableSlots => ParkingSlots.Count(s => !s.IsOccupied && !s.IsMaintenance);
     public decimal TotalRevenue { get; private set; } = 0m;
 
+
     public bool IsAutoModeEnabled 
     { 
         get => _systemState.IsAutoModeEnabled;
