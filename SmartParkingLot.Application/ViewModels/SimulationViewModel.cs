@@ -153,6 +153,7 @@ namespace SmartParkingLot.Application.ViewModels
             });
         }
 
+        
         public async Task TriggerSecurityBreach()
         {
             await Execute("SECURITY BREACH TRIGGERED", async () => 
