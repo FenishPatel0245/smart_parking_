@@ -9,6 +9,7 @@ public class LoginRequest
     public string Password { get; set; } = string.Empty;
 }
 
+// Response DTOs
 public class LoginResponse
 {
     public bool Success { get; set; }
