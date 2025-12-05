@@ -172,7 +172,7 @@ namespace SmartParkingLot.Application.ViewModels
             });
         }
 
-        // Helper
+        
         private async Task Execute(string successMessage, Func<Task> action)
         {
             if (IsBusy) return;
