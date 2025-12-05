@@ -44,6 +44,7 @@ public class DashboardViewModel
         _revenueService = revenueService;
     }
 
+
     public async Task InitializeAsync()
     {
         await LoadDataAsync();
