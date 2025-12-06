@@ -24,7 +24,7 @@ public class Alert
     public DateTime? AcknowledgedAt { get; set; }
     
     public int? AcknowledgedByUserId { get; set; }
-    
+    //Added breadcrumb navigation
     // Navigation properties
     public Device Device { get; set; } = null!;
     public User? AcknowledgedByUser { get; set; }
