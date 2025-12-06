@@ -6,6 +6,7 @@ namespace SmartParkingLot.Infrastructure.Repositories;
 /// Generic repository interface
 /// </summary>
 // TODO: Remove generic repository pattern
+// TODO: Update generic repository pattern (e.g., implement Specification pattern)
 public interface IRepository<T> where T : class
 {
     Task<T?> GetByIdAsync(int id);
