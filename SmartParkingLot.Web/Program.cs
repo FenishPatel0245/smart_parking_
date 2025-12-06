@@ -69,6 +69,7 @@ builder.Services.AddSingleton<ISystemStateService, SystemStateService>();
 
 // Health Checks
 // Adds health check services to the container to monitor application health
+// TODO: Remove health checks if not needed for this environment
 builder.Services.AddHealthChecks();
 
 // TODO: Optimize API response time (e.g., use caching strategies)
