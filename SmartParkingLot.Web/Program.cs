@@ -71,6 +71,7 @@ builder.Services.AddSingleton<ISystemStateService, SystemStateService>();
 // Adds health check services to the container to monitor application health
 builder.Services.AddHealthChecks();
 
+// TODO: Optimize API response time (e.g., use caching strategies)
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>
 {
