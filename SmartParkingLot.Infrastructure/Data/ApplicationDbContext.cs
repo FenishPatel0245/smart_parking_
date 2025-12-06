@@ -27,6 +27,7 @@ public class ApplicationDbContext : DbContext
 
         // TODO: Consider using DateTimeOffset for better timezone handling
         // TODO: Review and update entity relationships if needed
+        // TODO: Ensure database context is fully implemented and configured correctly
 
         // User configuration
         // Defines the schema and constraints for the User entity
