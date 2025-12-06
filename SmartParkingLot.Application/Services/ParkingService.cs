@@ -133,6 +133,7 @@ public class ParkingService : IParkingService
             ExitTime = DateTime.UtcNow,
             Status = "Completed",
             Fee = 5.00m // Flat rate simulation
+            // TODO: Integrate real payment gateway (e.g., Stripe, PayPal)
         };
     }
 
