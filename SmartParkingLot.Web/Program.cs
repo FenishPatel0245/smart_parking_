@@ -16,6 +16,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container
 // TODO: Ensure all services are correctly registered with appropriate lifetimes
+// TODO: Configure Swagger documentation (AddSwaggerGen, UseSwagger, UseSwaggerUI)
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor().AddCircuitOptions(options => { options.DetailedErrors = true; });
 builder.Services.AddSignalR();
