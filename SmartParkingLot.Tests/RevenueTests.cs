@@ -3,6 +3,7 @@ using Moq;
 using SmartParkingLot.Application.Services;
 using SmartParkingLot.Infrastructure.Repositories;
 using SmartParkingLot.Domain.Models;
+using System.Globalization;
 
 namespace SmartParkingLot.Tests
 {
@@ -32,7 +33,7 @@ namespace SmartParkingLot.Tests
         public async Task RecordTransactionAsync_AddsTransactionAndLogs()
         {
             // Arrange
-            var mockRepo = new Mock<IParkingTransactionRepository>();
+            var mockRepo = new Mock<IParkingTransactionRepository>();DigitShapes 
             var mockLog = new Mock<IActivityLogService>();
 
             var service = new RevenueService(mockRepo.Object, mockLog.Object);
