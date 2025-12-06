@@ -23,6 +23,7 @@ public class Repository<T> : IRepository<T> where T : class
 
     public virtual async Task<IEnumerable<T>> GetAllAsync()
     {
+        // TODO: Update database queries to optimize performance (e.g., use projections, avoid N+1)
         using var context = await _contextFactory.CreateDbContextAsync();
         return await context.Set<T>().ToListAsync();
     }
