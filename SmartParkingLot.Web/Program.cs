@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Components.Authorization;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container
+// TODO: Ensure all services are correctly registered with appropriate lifetimes
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor().AddCircuitOptions(options => { options.DetailedErrors = true; });
 builder.Services.AddSignalR();
