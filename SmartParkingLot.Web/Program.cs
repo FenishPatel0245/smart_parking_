@@ -118,6 +118,7 @@ app.MapHub<TelemetryHub>("/telemetryhub");
 
 // Health Check Endpoint
 // Maps the health check endpoint to /health for external monitoring
+// TODO: Remove health check endpoint mapping if not needed
 app.MapHealthChecks("/health");
 
 app.MapFallbackToPage("/_Host");
