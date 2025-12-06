@@ -50,7 +50,7 @@ public class ThresholdAlertStrategy : IAlertStrategy
 
         return AlertSeverity.Info;
     }
-
+    //Update text constrats ratio
     public string GenerateMessage(string deviceName, double currentValue, string unit, AlertSeverity severity)
     {
         return severity switch
