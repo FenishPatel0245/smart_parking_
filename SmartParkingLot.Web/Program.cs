@@ -112,6 +112,7 @@ if (!app.Environment.IsDevelopment())
 }
 
 // app.UseHttpsRedirection();
+// TODO: Enable Swagger middleware (app.UseSwagger() and app.UseSwaggerUI())
 app.UseStaticFiles();
 app.UseRouting();
 
