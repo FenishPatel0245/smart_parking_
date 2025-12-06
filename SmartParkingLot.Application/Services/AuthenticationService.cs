@@ -70,6 +70,8 @@ public class AuthenticationService : IAuthenticationService
             
             // Persist session
             await _sessionStorage.SetAsync("authToken", user.Id);
+            
+            // TODO: Implement refresh token logic for secure session management
 
             return new LoginResponse
             {
