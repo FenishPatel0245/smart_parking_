@@ -106,6 +106,7 @@ if (!app.Environment.IsDevelopment())
     // Global Exception Handling
     // Configures the exception handler middleware to catch unhandled exceptions
     // and redirect to the /Error page in non-development environments
+    // TODO: Enhance global exception handling (e.g., custom error pages, centralized logging)
     app.UseExceptionHandler("/Error");
     // app.UseHsts();
 }
