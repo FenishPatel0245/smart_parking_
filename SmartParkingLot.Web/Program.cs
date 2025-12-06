@@ -16,6 +16,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container
 // TODO: Ensure all services are correctly registered with appropriate lifetimes
+// TODO: Configure Swagger documentation (AddSwaggerGen, UseSwagger, UseSwaggerUI)
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor().AddCircuitOptions(options => { options.DetailedErrors = true; });
 builder.Services.AddSignalR();
@@ -47,6 +48,7 @@ builder.Services.AddSingleton<IAlertStrategy, ThresholdAlertStrategy>();
 
 // Services
 // Registers application services containing business logic
+// TODO: Review service lifetimes (Scoped vs Singleton vs Transient) for optimal performance
 builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
 builder.Services.AddScoped<IDeviceManagementService, DeviceManagementService>();
 builder.Services.AddScoped<ITelemetryService, TelemetryService>();
@@ -70,6 +72,7 @@ builder.Services.AddSingleton<ISystemStateService, SystemStateService>();
 // Health Checks
 // Adds health check services to the container to monitor application health
 // TODO: Remove health checks if not needed for this environment
+// TODO: Update health checks to include database connectivity validation
 builder.Services.AddHealthChecks();
 
 // TODO: Optimize API response time (e.g., use caching strategies)
