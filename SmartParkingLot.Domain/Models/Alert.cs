@@ -5,6 +5,8 @@ namespace SmartParkingLot.Domain.Models;
 /// <summary>
 /// Alert generated when device thresholds are violated
 /// </summary>
+
+//- Fix breadcrumb navigation
 public class Alert
 {
     public int Id { get; set; }
