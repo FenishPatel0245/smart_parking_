@@ -26,6 +26,7 @@ public class ApplicationDbContext : DbContext
         base.OnModelCreating(modelBuilder);
 
         // TODO: Consider using DateTimeOffset for better timezone handling
+        // TODO: Review and update entity relationships if needed
 
         // User configuration
         // Defines the schema and constraints for the User entity
