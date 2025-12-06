@@ -81,6 +81,7 @@ builder.Services.AddHttpContextAccessor();
 
 // Authentication & Authorization
 builder.Services.AddAuthorizationCore();
+// TODO: Optimize role-based authorization (e.g., use policies or claims transformation)
 builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
 
 var app = builder.Build();
