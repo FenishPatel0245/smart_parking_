@@ -28,6 +28,7 @@ public class RevenueService : IRevenueService
         return await _transactionRepository.GetTotalRevenueAsync();
     }
 
+    // Style payment confirmation page
     public async Task RecordTransactionAsync(decimal amount, string paymentMethod, int? parkingSlotId = null)
     {
         var transaction = new ParkingTransaction
