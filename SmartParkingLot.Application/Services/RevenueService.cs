@@ -3,6 +3,7 @@ using SmartParkingLot.Domain.Models;
 
 namespace SmartParkingLot.Application.Services;
 
+// Remove charts for revenue
 public interface IRevenueService
 {
     Task<decimal> GetTotalRevenueAsync();
