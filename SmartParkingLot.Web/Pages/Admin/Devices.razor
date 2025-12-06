@@ -73,7 +73,9 @@ else
 
 @*         - Add modal close behavior
  *@
-        @if (showModal)
+
+@*         - Remove modal close behavior *@
+    @if (showModal)
         {
             <div class="modal-overlay" @onclick="CloseModal">
                 <div class="modal-content" @onclick:stopPropagation="true">
