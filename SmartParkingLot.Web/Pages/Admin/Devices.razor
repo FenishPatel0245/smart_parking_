@@ -71,11 +71,10 @@ else
             </table>
         </div>
 
-@*         - Add modal close behavior
+@*         Remove modal close behavior
  *@
-
-@*         - Remove modal close behavior *@
-    @if (showModal)
+@*         - Add modal close behavior
+ *@ @if (showModal)
         {
             <div class="modal-overlay" @onclick="CloseModal">
                 <div class="modal-content" @onclick:stopPropagation="true">
