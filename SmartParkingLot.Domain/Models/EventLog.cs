@@ -2,7 +2,7 @@ namespace SmartParkingLot.Domain.Models;
 
 /// <summary>
 /// System event log for audit trail
-/// </summary>
+// </summary>
 public class EventLog
 {
     public int Id { get; set; }
