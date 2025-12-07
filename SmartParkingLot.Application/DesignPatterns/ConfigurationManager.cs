@@ -62,3 +62,4 @@ public sealed class ConfigurationManager
         }
     }
 }
+//design booking history table
