@@ -41,6 +41,7 @@ public class ActivityLogService : IActivityLogService
         OnLogAdded?.Invoke(entry);
     }
 
+    //add tooltip to status icons
     public void ClearLogs()
     {
         _logs.Clear();
