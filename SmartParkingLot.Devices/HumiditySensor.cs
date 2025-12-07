@@ -2,9 +2,9 @@ using SmartParkingLot.Domain.Enums;
 
 namespace SmartParkingLot.Devices;
 
-/// <summary>
-/// Humidity sensor device (non-controllable)
-/// </summary>
+// <summary>
+// Humidity sensor device (non-controllable)
+// </summary>
 public class HumiditySensor : BaseDevice
 {
     public HumiditySensor()
