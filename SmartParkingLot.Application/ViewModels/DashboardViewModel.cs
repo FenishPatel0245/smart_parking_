@@ -12,7 +12,6 @@ public class DashboardViewModel
     private readonly IServiceScopeFactory _scopeFactory;
     private readonly ISystemStateService _systemState;
     
-
     public List<DeviceDto> Devices { get; private set; } = new();
     public List<AlertDto> ActiveAlerts { get; private set; } = new();
     public List<ParkingSlot> ParkingSlots { get; private set; } = new();
