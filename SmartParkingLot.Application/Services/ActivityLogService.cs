@@ -22,6 +22,8 @@ public class ActivityLogService : IActivityLogService
         return _logs.OrderByDescending(l => l.Timestamp);
     }
 
+    // remove tooltip to status icosn
+
     public void LogActivity(string title, string description, string severity = "Info", string actionType = "System", string icon = "fas fa-info-circle")
     {
         var entry = new ActivityLogEntry
