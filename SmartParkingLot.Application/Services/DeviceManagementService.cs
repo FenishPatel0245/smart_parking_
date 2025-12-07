@@ -5,7 +5,7 @@ using SmartParkingLot.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using SmartParkingLot.Infrastructure.Data;
 
-namespace SmartParkingLot.Application.Services;
+namespace SmartParkingLot.Application.Services ;
 
 public interface IDeviceManagementService
 {
