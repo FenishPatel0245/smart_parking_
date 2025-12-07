@@ -1,4 +1,5 @@
 // TODO: Clean up unused namespaces
+// TODO: Fix NuGet packages (consolidate versions, remove unused, resolve vulnerabilities)
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
 using Microsoft.Extensions.DependencyInjection;
