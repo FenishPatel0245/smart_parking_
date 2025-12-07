@@ -80,6 +80,9 @@ public class AuthenticationService : IAuthenticationService
                 User = CurrentUser
             };
         }
+
+        //design 404 error page
+
         catch (Exception ex)
         {
             Console.WriteLine($"Login Error: {ex}");

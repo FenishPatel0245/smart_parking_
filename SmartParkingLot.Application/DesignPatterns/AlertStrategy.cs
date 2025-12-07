@@ -7,6 +7,7 @@ namespace SmartParkingLot.Application.DesignPatterns;
 /// <summary>
 /// Strategy pattern for alert rule evaluation
 /// </summary>
+/// //design settings page
 public interface IAlertStrategy
 {
     bool ShouldGenerateAlert(double currentValue, double? warningThreshold, double? criticalThreshold);
