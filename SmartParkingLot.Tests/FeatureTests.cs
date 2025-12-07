@@ -62,7 +62,7 @@ namespace SmartParkingLot.Tests
             service.OnStateChanged += () => eventRaised = true;
 
             // Act
-            service.IsAutoModeEnabled = true;
+            service.IsAutoModeEnabled = true ;
 
             // Assert
             Assert.True(service.IsAutoModeEnabled);
