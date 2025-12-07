@@ -7,6 +7,7 @@ public class SlotSensor : BaseDevice
     public string SlotNumber { get; set; } = string.Empty;
     public bool IsOccupied { get; private set; }
 
+
     public SlotSensor()
     {
         Type = DeviceType.SlotSensor;
