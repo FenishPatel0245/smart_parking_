@@ -92,6 +92,7 @@ public class AlertStrategyTests
     }
 }
 
+//Design booking history table
 public class ConfigurationManagerTests
 {
     [Fact]
