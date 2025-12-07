@@ -10,3 +10,15 @@ C:\Users\Fenish\Downloads\final_best_proj\SmartParkingLot.Domain\obj\Debug\net8.
 C:\Users\Fenish\Downloads\final_best_proj\SmartParkingLot.Domain\obj\Debug\net8.0\SmartParkingLot.Domain.pdb
 C:\Users\Fenish\Downloads\final_best_proj\SmartParkingLot.Domain\obj\Debug\net8.0\ref\SmartParkingLot.Domain.dll
 C:\Users\Fenish\Downloads\final_best_proj\SmartParkingLot.Domain\obj\Debug\net8.0\SmartParkingLot.Domain.sourcelink.json
+C:\Users\amnaf\smart_parking_\SmartParkingLot.Domain\bin\Debug\net8.0\SmartParkingLot.Domain.deps.json
+C:\Users\amnaf\smart_parking_\SmartParkingLot.Domain\bin\Debug\net8.0\SmartParkingLot.Domain.dll
+C:\Users\amnaf\smart_parking_\SmartParkingLot.Domain\bin\Debug\net8.0\SmartParkingLot.Domain.pdb
+C:\Users\amnaf\smart_parking_\SmartParkingLot.Domain\obj\Debug\net8.0\SmartParkingLot.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\amnaf\smart_parking_\SmartParkingLot.Domain\obj\Debug\net8.0\SmartParkingLot.Domain.AssemblyInfoInputs.cache
+C:\Users\amnaf\smart_parking_\SmartParkingLot.Domain\obj\Debug\net8.0\SmartParkingLot.Domain.AssemblyInfo.cs
+C:\Users\amnaf\smart_parking_\SmartParkingLot.Domain\obj\Debug\net8.0\SmartParkingLot.Domain.csproj.CoreCompileInputs.cache
+C:\Users\amnaf\smart_parking_\SmartParkingLot.Domain\obj\Debug\net8.0\SmartParkingLot.Domain.sourcelink.json
+C:\Users\amnaf\smart_parking_\SmartParkingLot.Domain\obj\Debug\net8.0\SmartParkingLot.Domain.dll
+C:\Users\amnaf\smart_parking_\SmartParkingLot.Domain\obj\Debug\net8.0\refint\SmartParkingLot.Domain.dll
+C:\Users\amnaf\smart_parking_\SmartParkingLot.Domain\obj\Debug\net8.0\SmartParkingLot.Domain.pdb
+C:\Users\amnaf\smart_parking_\SmartParkingLot.Domain\obj\Debug\net8.0\ref\SmartParkingLot.Domain.dll

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SmartParkingLot.Application")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c3db2c9523d4d3901b40c3001eb29fd9ac8c7527")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+632535b0359cae8ffbb7ae0b1d3130e4a5d2a4da")]
 [assembly: System.Reflection.AssemblyProductAttribute("SmartParkingLot.Application")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SmartParkingLot.Application")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
