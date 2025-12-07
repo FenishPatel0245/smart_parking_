@@ -26,7 +26,8 @@ public class SlotSensor : BaseDevice
         {
             IsOccupied = !IsOccupied;
         }
-        
+
+        // Update CurrentValue based on occupancy
         CurrentValue = IsOccupied ? 1 : 0;
         
         UpdateStatus();
