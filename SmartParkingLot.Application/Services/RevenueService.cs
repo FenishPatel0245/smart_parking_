@@ -10,6 +10,7 @@ public interface IRevenueService
     Task RecordTransactionAsync(decimal amount, string paymentMethod, int? parkingSlotId = null);
 }
 
+//update charts for revenue
 public class RevenueService : IRevenueService
 {
     private readonly IParkingTransactionRepository _transactionRepository;
