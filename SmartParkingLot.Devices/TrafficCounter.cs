@@ -14,6 +14,7 @@ public class TrafficCounter : BaseDevice
         IsControllable = true;
     }
 
+    // Simulated telemetry file path
     public override async Task<double> ReadTelemetryAsync()
     {
         // Reads cars per minute
