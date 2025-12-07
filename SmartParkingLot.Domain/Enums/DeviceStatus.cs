@@ -7,7 +7,7 @@ public enum DeviceStatus
 {
     /// <summary>
     /// Device is offline or disconnected (gray)
-    /// </summary>
+    // </summary>
     Offline = 0,
     
     /// <summary>
