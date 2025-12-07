@@ -5,7 +5,7 @@ using SmartParkingLot.Infrastructure.Repositories;
 using SmartParkingLot.Domain.Models;
 using SmartParkingLot.Domain.Enums;
 
-namespace SmartParkingLot.Tests.IntegrationTests;
+namespace SmartParkingLot.Tests.IntegrationTests ;
 
 public class DeviceRepositoryIntegrationTests : IDisposable
 {
