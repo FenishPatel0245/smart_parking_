@@ -3,7 +3,7 @@ using SmartParkingLot.Domain.Enums;
 namespace SmartParkingLot.Devices;
 
 /// <summary>
-/// Base abstract class for all device types
+/// Base abstract  class for all device types
 /// </summary>
 public abstract class BaseDevice
 {
