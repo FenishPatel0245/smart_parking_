@@ -24,6 +24,7 @@ public class VentilationFan : BaseDevice
         return value;
     }
 
+    // Control commands: "start", "stop", "setSpeed"
     public override async Task<bool> ControlAsync(string command, object? value = null)
     {
         switch (command.ToLower())
