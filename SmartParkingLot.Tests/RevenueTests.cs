@@ -43,7 +43,7 @@ namespace SmartParkingLot.Tests
             // Act
             await service.RecordTransactionAsync(amount, method);
 
-            // Assert
+            // Assert 
             mockRepo.Verify(r => r.AddAsync(It.Is<ParkingTransaction>(t => 
                 t.Amount == amount && 
                 t.PaymentMethod == method && 
