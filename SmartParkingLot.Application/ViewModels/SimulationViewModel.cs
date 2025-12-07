@@ -2,7 +2,6 @@ using System;
 using System.Threading.Tasks;
 using SmartParkingLot.Application.Services;
 
-
 namespace SmartParkingLot.Application.ViewModels
 {
     public class SimulationViewModel
