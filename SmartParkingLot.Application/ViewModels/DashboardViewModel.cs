@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 namespace SmartParkingLot.Application.ViewModels;
 //Added admin dashboard widgets
 //create admin dashboard widgets
+
 public class DashboardViewModel
 {
     private readonly IServiceScopeFactory _scopeFactory;
