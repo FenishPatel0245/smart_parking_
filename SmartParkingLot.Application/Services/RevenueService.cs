@@ -11,6 +11,7 @@ public interface IRevenueService
 }
 
 //update charts for revenue
+//refactor
 public class RevenueService : IRevenueService
 {
     private readonly IParkingTransactionRepository _transactionRepository;
@@ -30,6 +31,7 @@ public class RevenueService : IRevenueService
     }
 
     // Style payment confirmation page
+    //--
     public async Task RecordTransactionAsync(decimal amount, string paymentMethod, int? parkingSlotId = null)
     {
         var transaction = new ParkingTransaction
