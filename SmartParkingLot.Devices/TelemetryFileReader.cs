@@ -7,7 +7,7 @@ public static class TelemetryFileReader
 {
     /// <summary>
     /// Read next value from telemetry file (loops to beginning when reaching end)
-    /// </summary>
+    // </summary>
     public static async Task<(double value, int newPosition)> ReadNextValueAsync(string filePath, int currentPosition)
     {
         if (!File.Exists(filePath))
