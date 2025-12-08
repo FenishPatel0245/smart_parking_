@@ -24,6 +24,7 @@ public class ApplicationDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        // TODO: Update migration for parking slots: Check for data loss warnings
         base.OnModelCreating(modelBuilder);
         
         // TODO: Implement entity relationships (e.g., using Fluent API for complex keys or navigation properties)
