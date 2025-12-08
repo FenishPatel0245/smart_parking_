@@ -35,6 +35,7 @@ public class ApplicationDbContext : DbContext
         // TODO: Review and update entity relationships if needed
         // TODO: Ensure database context is fully implemented and configured correctly
         // TODO: Implement entity relationships (e.g., using Fluent API for complex keys or navigation properties)
+        // TODO: Refactor entity relationships - fix cascades
 
         // User configuration
         // Defines the schema and constraints for the User entity
