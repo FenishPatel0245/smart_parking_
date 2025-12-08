@@ -5,6 +5,7 @@ using SmartParkingLot.Infrastructure.Repositories;
 using SmartParkingLot.Domain.Models;
 using System.Globalization;
 
+
 namespace SmartParkingLot.Tests
 {
     public class RevenueTests
