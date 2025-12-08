@@ -74,7 +74,7 @@ namespace SmartParkingLot.Tests
         {
             // Arrange
             var service = new SystemStateService();
-            service.IsAutoModeEnabled = true; // Set initial state
+            service.IsAutoModeEnabled = true; // Set  initial state
             bool eventRaised = false;
             service.OnStateChanged += () => eventRaised = true;
 
