@@ -17,6 +17,7 @@ A comprehensive, real-time monitoring and management system for modern smart par
 The solution follows **Clean Architecture** principles:
 <!-- TODO: Update folder structure to match Clean Architecture layers more strictly -->
 <!-- TODO: Remove folder structure -->
+<!-- TODO: Fix folder structure to align with Clean Architecture -->
 
 - **SmartParkingLot.Domain**: Core entities (Device, User, Alert) and enums.
 - **SmartParkingLot.Infrastructure**: Database context (SQLite) and repositories.
