@@ -51,6 +51,7 @@ builder.Services.AddSingleton<IAlertStrategy, ThresholdAlertStrategy>();
 
 // Services
 // Registers application services containing business logic
+// TODO: Configure dependency injection for new services
 // TODO: Review service lifetimes (Scoped vs Singleton vs Transient) for optimal performance
 builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
 builder.Services.AddScoped<IDeviceManagementService, DeviceManagementService>();
