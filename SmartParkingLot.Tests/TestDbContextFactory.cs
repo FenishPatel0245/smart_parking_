@@ -9,7 +9,7 @@ namespace SmartParkingLot.Tests
 
         public TestDbContextFactory(DbContextOptions<ApplicationDbContext> options)
         {
-            _options = options;
+            _options = options ;
         }
 
         public ApplicationDbContext CreateDbContext()
