@@ -18,6 +18,7 @@ public class EventLog
     public string? AdditionalData { get; set; }
     
     // TODO: Consider using DateTimeOffset for better timezone handling
+    // TODO: Use DateTimeOffset for event logs
     public DateTime Timestamp { get; set; } = DateTime.UtcNow;
     
     // Navigation properties
