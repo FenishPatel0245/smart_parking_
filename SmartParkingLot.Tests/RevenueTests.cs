@@ -30,7 +30,7 @@ namespace SmartParkingLot.Tests
         }
 
         [Fact]
-        //Optimize card component styles
+        //Optimize  card component styles
         public async Task RecordTransactionAsync_AddsTransactionAndLogs()
         {
             // Arrange
