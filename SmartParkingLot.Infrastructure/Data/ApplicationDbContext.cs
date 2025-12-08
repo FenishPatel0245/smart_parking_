@@ -11,6 +11,7 @@ public class ApplicationDbContext : DbContext
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
         : base(options)
     {
+        // TODO: Update database context configuration
     }
 
     public DbSet<User> Users { get; set; }
