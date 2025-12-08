@@ -89,7 +89,7 @@ public class DashboardViewModel
             "System", 
             "fas fa-robot");
         // State change event from service will trigger UI update if we subscribe, 
-        // but for now local notify is enough as getter delegates to service
+        // but for now local notify is enough as getter delegates to  service
         NotifyStateChanged();
     }
 
