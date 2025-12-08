@@ -9,7 +9,7 @@ public class DeviceFactoryTests
     [Fact]
     public void CreateDevice_TemperatureSensor_ShouldReturnCorrectType()
     {
-        // Arrange
+        //  Arrange
         var factory = new DeviceFactory();
 
         // Act
