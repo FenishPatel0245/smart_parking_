@@ -14,6 +14,7 @@ using SmartParkingLot.Web.Hubs;
 using SmartParkingLot.Web.Services;
 using Microsoft.AspNetCore.Components.Authorization;
 
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container
