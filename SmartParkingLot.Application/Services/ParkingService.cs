@@ -23,6 +23,7 @@ public class ParkingService : IParkingService
 
     public async Task<IEnumerable<ParkingSlot>> GetAllSlotsAsync()
     {
+        // TODO: Update parking service logic (Optimize query performance)
         using var context = await _contextFactory.CreateDbContextAsync();
         return await context.ParkingSlots.ToListAsync();
     }
