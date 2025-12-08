@@ -56,7 +56,7 @@ namespace SmartParkingLot.Tests
         [Fact]
         public void SystemStateService_UpdatesState_AndRaisesEvent()
         {
-            // Arrange
+            //  Arrange
             var service = new SystemStateService();
             bool eventRaised = false;
             service.OnStateChanged += () => eventRaised = true;
