@@ -25,7 +25,7 @@ public class CustomAuthenticationStateProvider : AuthenticationStateProvider
 
     public override async Task<AuthenticationState> GetAuthenticationStateAsync()
     {
-        // TODO: Fix role-based authorization: Verify roles against database/permissions
+        // TODO:Fix role-based authorization: Verify roles against database/permissions
         var user = _authService.CurrentUser;
         
         // If not in memory, try to get from session
