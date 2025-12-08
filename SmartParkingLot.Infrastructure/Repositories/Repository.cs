@@ -7,6 +7,7 @@ namespace SmartParkingLot.Infrastructure.Repositories;
 /// Generic repository implementation
 /// </summary>
 // TODO: Refactor implementation to support Unit of Work (remove context creation per method)
+// TODO: Enhance generic repository pattern
 public class Repository<T> : IRepository<T> where T : class
 {
     protected readonly IDbContextFactory<ApplicationDbContext> _contextFactory;
