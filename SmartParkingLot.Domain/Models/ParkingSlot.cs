@@ -13,4 +13,5 @@ public class ParkingSlot
     public string Type { get; set; } = "Regular"; // Regular, EV, Accessible
     public bool IsReserved { get; set; } = false;
     public bool IsMaintenance { get; set; } = false;
+    // TODO: Add entity relationships (e.g., to Reservation or User entities)
 }
