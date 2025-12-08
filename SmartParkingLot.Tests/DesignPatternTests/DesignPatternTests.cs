@@ -20,6 +20,7 @@ public class DeviceFactoryTests
         Assert.Equal(DeviceType.TemperatureSensor, device.Type);
     }
 
+
     [Fact]
     public void CreateDevice_AllTypes_ShouldCreateSuccessfully()
     {

@@ -3,7 +3,7 @@ using SmartParkingLot.Infrastructure.Data;
 
 namespace SmartParkingLot.Infrastructure.Repositories;
 
-/// <summary>
+// <summary>
 /// Generic repository implementation
 /// </summary>
 // TODO: Refactor implementation to support Unit of Work (remove context creation per method)

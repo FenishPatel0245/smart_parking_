@@ -2,7 +2,7 @@ using SmartParkingLot.Domain.Enums;
 
 namespace SmartParkingLot.Domain.Models;
 
-/// <summary>
+// <summary>
 /// Device entity representing a monitoring/control device
 /// </summary>
 public class Device

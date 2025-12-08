@@ -5,6 +5,7 @@ using SmartParkingLot.Infrastructure.Repositories;
 using SmartParkingLot.Domain.Models;
 using System.Globalization;
 
+
 namespace SmartParkingLot.Tests
 {
     public class RevenueTests
@@ -29,7 +30,7 @@ namespace SmartParkingLot.Tests
         }
 
         [Fact]
-        //Optimize card component styles
+        //Optimize  card component styles
         public async Task RecordTransactionAsync_AddsTransactionAndLogs()
         {
             // Arrange

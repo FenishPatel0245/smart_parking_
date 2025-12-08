@@ -9,7 +9,7 @@ public class TemperatureSensorTests
     [Fact]
     public void TemperatureSensor_ShouldInitializeCorrectly()
     {
-        // Arrange & Act
+        // Arrange &  Act
         var sensor = new TemperatureSensor();
 
         // Assert
