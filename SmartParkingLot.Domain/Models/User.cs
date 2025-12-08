@@ -3,7 +3,7 @@ using SmartParkingLot.Domain.Enums;
 namespace SmartParkingLot.Domain.Models;
 
 // <summary>
-/// User entity for authentication and authorization
+// User entity for authentication and authorization
 /// </summary>
 public class User
 {
