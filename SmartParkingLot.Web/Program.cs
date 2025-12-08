@@ -25,6 +25,7 @@ builder.Services.AddSignalR();
 builder.Services.AddScoped<ProtectedSessionStorage>();
 
 // Database
+// TODO: Implement connection string from configuration (appsettings.json) instead of hardcoding
 var dbPath = Path.Combine(builder.Environment.ContentRootPath, "scada_monitoring.db");
 builder.Services.AddDbContextFactory<ApplicationDbContext>(options =>
     options.UseSqlite($"Data Source={dbPath}"));
