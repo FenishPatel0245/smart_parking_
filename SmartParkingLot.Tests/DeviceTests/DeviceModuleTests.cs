@@ -110,7 +110,7 @@ public class VentilationFanTests
         // Act
         var result = await fan.ControlAsync("stop");
 
-        // Assert
+        //Assert
         Assert.True(result);
         Assert.False(fan.IsRunning);
         Assert.Equal(0, fan.FanSpeed);
