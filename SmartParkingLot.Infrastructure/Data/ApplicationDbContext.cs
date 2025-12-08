@@ -141,6 +141,7 @@ public class ApplicationDbContext : DbContext
     private void SeedData(ModelBuilder modelBuilder)
     {
         // TODO: Implement comprehensive seed data generation (e.g., use Bogus for realistic data or load from external files)
+        // TODO: Implement seed data generation - enhance robustness
         // Seed admin user (password: admin123)
         modelBuilder.Entity<User>().HasData(
             new User
