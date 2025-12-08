@@ -19,6 +19,7 @@ public class ApplicationDbContext : DbContext
     public DbSet<Alert> Alerts { get; set; }
     public DbSet<EventLog> EventLogs { get; set; }
     public DbSet<ParkingSlot> ParkingSlots { get; set; }
+    // TODO: Update migration for parking slots (e.g., add new columns for sensor data)
     public DbSet<ParkingTransaction> ParkingTransactions { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
