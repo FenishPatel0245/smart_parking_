@@ -34,7 +34,7 @@ namespace SmartParkingLot.Tests
         public async Task RecordTransactionAsync_AddsTransactionAndLogs()
         {
             // Arrange
-            var mockRepo = new Mock<IParkingTransactionRepository>();DigitShapes 
+            var mockRepo = new Mock<IParkingTransactionRepository>(); 
             var mockLog = new Mock<IActivityLogService>();
 
             var service = new RevenueService(mockRepo.Object, mockLog.Object);

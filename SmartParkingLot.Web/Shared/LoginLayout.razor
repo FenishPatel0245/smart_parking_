@@ -1,0 +1,80 @@
+@inherits LayoutComponentBase
+@inject SmartParkingLot.Application.Services.IAuthenticationService AuthService
+@inject IJSRuntime JSRuntime
+
+@* Login-specific layout without navigation header *@
+@if (!isInitialized)
+{
+    <div class="loading-overlay">
+        <div class="spinner"></div>
+    </div>
+}
+else
+{
+    <div class="layout-container login-layout">
+        @* Header removed for Login page *@
+        
+        <main class="content-area animate-fade-in">
+            @Body
+        </main>
+    </div>
+}
+
+<style>
+    .loading-overlay {
+        position: fixed;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: var(--bg-dark);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 2000;
+    }
+    
+    .spinner {
+        width: 40px;
+        height: 40px;
+        border: 3px solid rgba(255,255,255,0.1);
+        border-radius: 50%;
+        border-top-color: var(--primary);
+        animation: spin 1s ease-in-out infinite;
+    }
+    
+    @@keyframes spin {
+        to { transform: rotate(360deg); }
+    }
+
+    .layout-container {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .content-area {
+        /* Adjusted margin since there is no header */
+        margin-top: 0; 
+        padding: 0 2rem;
+        flex: 1;
+        width: 100%;
+        max-width: 1400px;
+        align-self: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    /* Ensure full height for centering */
+    .login-layout .content-area {
+        min-height: 100vh;
+    }
+</style>
+
+@code {
+    private bool isInitialized = true; // Render immediately associated with body
+    private string debugMessage = "";
+
+    protected override void OnInitialized()
+    {
+        isInitialized = true;
+    }
+}

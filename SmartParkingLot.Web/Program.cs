@@ -11,7 +11,6 @@ using SmartParkingLot.Application.Services;
 using SmartParkingLot.Application.DesignPatterns;
 using SmartParkingLot.Application.ViewModels;
 using SmartParkingLot.Web.Hubs;
-using SmartParkingLot.Web.Hubs;
 using SmartParkingLot.Web.Services;
 using Microsoft.AspNetCore.Components.Authorization;
 
