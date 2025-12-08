@@ -7,6 +7,7 @@ namespace SmartParkingLot.Web.Hubs;
 /// <summary>
 /// SignalR hub for real-time telemetry updates
 /// </summary>
+// TODO: Optimize SignalR hub for real-time updates (e.g., use groups, reduce message size)
 public class TelemetryHub : Hub, IDeviceObserver
 {
     private static IHubContext<TelemetryHub>? _hubContext;
