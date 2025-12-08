@@ -26,6 +26,7 @@ public class CustomAuthenticationStateProvider : AuthenticationStateProvider
     public override async Task<AuthenticationState> GetAuthenticationStateAsync()
     {
         // TODO: Remove role-based authorization if switching to claim-based only
+        // TODO: Optimize role check caching
         // TODO: Fix role-based authorization: Verify roles against database/permissions
         // TODO: Implement comprehensive role-based authorization (RBAC)
         var user = _authService.CurrentUser;
