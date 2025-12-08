@@ -111,6 +111,7 @@ if (!app.Environment.IsDevelopment())
     // and redirect to the /Error page in non-development environments
     // TODO: Enhance global exception handling (e.g., custom error pages, centralized logging)
     // TODO: Implement custom GlobalExceptionHandlerMiddleware to catch and log unhandled exceptions
+    // TODO: Implement validation pipeline behavior (e.g., using FluentValidation and MediatR)
     app.UseExceptionHandler("/Error");
     // app.UseHsts();
 }
