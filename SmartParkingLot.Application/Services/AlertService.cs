@@ -19,6 +19,7 @@ public interface IAlertService
 public class AlertService : IAlertService
 {
     private readonly IAlertRepository _alertRepository;
+    // TODO: Optimize email notifications - implement batching
     private readonly IDeviceSubject _deviceSubject;
     private readonly IAlertStrategy _alertStrategy;
     private readonly ILogger<AlertService> _logger;
