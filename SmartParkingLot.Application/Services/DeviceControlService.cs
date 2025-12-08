@@ -100,7 +100,7 @@ public class DeviceControlService : IDeviceControlService
     {
         var description = value != null
             ? $"Control command '{command}' with value '{value}' executed on device {deviceName}"
-            : $"Control command '{command}' executed on device {deviceName}";
+            : $"Control command '{command}' executed on device {deviceName}" ;
 
         var log = new Domain.Models.EventLog
         {
