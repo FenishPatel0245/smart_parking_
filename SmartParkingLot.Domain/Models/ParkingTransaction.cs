@@ -7,6 +7,7 @@ public class ParkingTransaction
     public int Id { get; set; }
     public int? ParkingSlotId { get; set; }
     public decimal Amount { get; set; }
+    // TODO: Fix DateTime Offset issue
     public DateTime TransactionDate { get; set; }
     public string PaymentMethod { get; set; } = string.Empty; 
     public string Status { get; set; } = string.Empty; // "Completed", "Pending", "Failed"
