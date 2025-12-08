@@ -11,6 +11,7 @@ public interface IAuthenticationService
     Task LogoutAsync(int userId);
     Task<UserDto?> GetUserByIdAsync(int userId);
     Task InitializeAsync();
+    // TODO: Implement user registration logic (RegisterUserAsync) including password hashing and validation
     UserDto? CurrentUser { get; }
     event Action? OnAuthStateChanged;
 }
