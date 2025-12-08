@@ -1,5 +1,6 @@
 // TODO: Clean up unused namespaces
 // TODO: Fix NuGet packages (consolidate versions, remove unused, resolve vulnerabilities)
+// TODO: Update NuGet packages to latest stable versions
 // TODO: Remove validation pipeline behavior
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
