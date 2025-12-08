@@ -15,7 +15,7 @@ public class TelemetryHub : Hub, IDeviceObserver
     {
         _hubContext = hubContext;
         
-        // Register as observer
+        // Register as   observer
         deviceSubject.Attach(this);
     }
 
