@@ -27,6 +27,7 @@ public class ApplicationDbContext : DbContext
     {
         // TODO: Update migration for parking slots: Check for data loss warnings
         // TODO: Fix migration for parking slots - resolve pending changes
+        // TODO: Resolve migration conflicts
         base.OnModelCreating(modelBuilder);
         
         // TODO: Implement entity relationships (e.g., using Fluent API for complex keys or navigation properties)
