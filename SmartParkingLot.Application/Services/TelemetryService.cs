@@ -15,7 +15,6 @@ public interface ITelemetryService
     Task<TelemetryDto?> GetLatestTelemetryAsync(int deviceId);
 }
 
-
 public class TelemetryService : ITelemetryService
 {
     private readonly ITelemetryRepository _telemetryRepository;
