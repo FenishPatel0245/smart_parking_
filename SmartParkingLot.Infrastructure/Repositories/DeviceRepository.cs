@@ -8,7 +8,7 @@ public interface IDeviceRepository : IRepository<Device>
 {
     Task<Device?> GetByDeviceIdAsync(string deviceId);
     Task<IEnumerable<Device>> GetActiveDevicesAsync();
-    Task<IEnumerable<Device>> GetControllableDevicesAsync();
+    Task<IEnumerable<Device>> GetControllableDevicesAsync() ;
 }
 
 public class DeviceRepository : Repository<Device>, IDeviceRepository
